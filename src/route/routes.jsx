@@ -1,4 +1,4 @@
-import ListCourse from '../components/ListCourse';
+import ListCourse from '../components/ListCourses';
 import { Route } from '../security/route';
 
 export const routes: Route[] = [

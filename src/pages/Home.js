@@ -1,8 +1,9 @@
 import React from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
-import CourseItem from './CourseItem';
+import { Container } from 'react-bootstrap';
+import ListCourses from '../components/ListCourses';
+import ListPaths from '../components/ListPaths';
 
-function ListCourse() {
+function Home() {
   return (
     <Container>
       <h3>
@@ -11,15 +12,11 @@ function ListCourse() {
           Learn in-demand skills in half the time
         </span>
       </h3>
-      {new Array(3).fill(0).map(() => (
-        <Row className='my-4'>
-          {new Array(3).fill(0).map(() => (
-            <Col>
-              <CourseItem />
-            </Col>
-          ))}
-        </Row>
-      ))}
+      <h1>Skill paths</h1>
+      <ListPaths />
+      <h1>All courses</h1>
+      <ListCourses />
+
       <ul className='pagination'>
         <li className='page-item previous'>
           <a href='#' className='page-link'>
@@ -73,4 +70,4 @@ function ListCourse() {
   );
 }
 
-export default ListCourse;
+export default Home;

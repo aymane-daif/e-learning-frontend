@@ -1,5 +1,5 @@
 import { useKeycloak } from '@react-keycloak/web';
-import ListCourse from './components/ListCourse';
+import Home from './pages/Home';
 import Loader from './shared/loader/loader';
 
 function App({ children }) {
@@ -9,7 +9,7 @@ function App({ children }) {
   //   return <Loader />;
   // }
   // return { children };
-  return <ListCourse />;
+  return <Home />;
 }
 
 export default App;

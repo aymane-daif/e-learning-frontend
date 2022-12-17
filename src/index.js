@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { ReactKeycloakProvider } from '@react-keycloak/web';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, RouterProvider } from 'react-router-dom';
 import App from './App';
 import ControlledRoute from './security/controlledRoute';
 import keycloak from './security/keycloak-config';
@@ -37,7 +37,8 @@ root.render(
   //     </BrowserRouter>
   //   </Provider>
   // </ReactKeycloakProvider>
-  <App />
+  <RouterProvider router={routes} ></RouterProvider>
+
 );
 
 // If you want to start measuring performance in your app, pass a function

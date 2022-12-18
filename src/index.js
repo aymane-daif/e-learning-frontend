@@ -37,7 +37,9 @@ root.render(
   //     </BrowserRouter>
   //   </Provider>
   // </ReactKeycloakProvider>
-  <RouterProvider router={routes} ></RouterProvider>
+  <ReactKeycloakProvider authClient={keycloak}>
+    <RouterProvider router={routes} ></RouterProvider>
+  </ReactKeycloakProvider>
 
 );
 

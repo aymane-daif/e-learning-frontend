@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 const AddUserForm = () => {
@@ -6,8 +6,11 @@ const AddUserForm = () => {
     register,
     formState: { errors },
     watch,
-    handleSubmit,
-  } = useForm();
+    handleSubmit
+  } = useForm({
+    mode: "onChange",
+  });
+
   const onSubmit = (data) => {
     console.log(data);
   };
@@ -268,7 +271,7 @@ const AddUserForm = () => {
           <input
             type="password"
             placeholder="Password confirmation"
-            {...register("changepassword", {
+            {...register("passwordConfirmation", {
               required: true,
               validate: (val) => {
                 if (watch("password") !== val)
@@ -276,13 +279,13 @@ const AddUserForm = () => {
               },
             })}
             className={`form-control form-control-lg form-control-solid ${
-              errors.changepassword ? "is-invalid" : "is-valid"
+              errors.passwordConfirmation ? "is-invalid" : "is-valid"
             }`}
           />
-          {errors.changepassword && (
+          {errors.passwordConfirmation && (
             <div className="fv-plugins-message-container">
               <div className="fv-help-block">
-                <span role="alert">{errors.changepassword?.message}</span>
+                <span role="alert">{errors.passwordConfirmation?.message}</span>
               </div>
             </div>
           )}
@@ -295,7 +298,7 @@ const AddUserForm = () => {
       <div className="row fv-row mb-7">
         <div className="col-xl-6">
           <label className="form-label fw-bolder text-dark fs-6">
-            You are ?
+            Are you ?
           </label>
           <div className="position-relative mb-3">
             <select

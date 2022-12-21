@@ -2,6 +2,7 @@
 import { useKeycloak } from "@react-keycloak/web";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import {registerUser} from "../services/userService";
 
 const AddUserForm = () => {
   const {
@@ -16,6 +17,9 @@ const AddUserForm = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+    registerUser(data).then((response) => {
+      console.log("res: "+response);
+    });
   };
   
   return (

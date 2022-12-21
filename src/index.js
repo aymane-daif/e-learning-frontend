@@ -37,7 +37,12 @@ root.render(
   //     </BrowserRouter>
   //   </Provider>
   // </ReactKeycloakProvider>
-  <RouterProvider router={routes} ></RouterProvider>
+  <ReactKeycloakProvider authClient={keycloak}
+  initOptions={{
+    onLoad: 'check-sso',
+  }}>
+    <RouterProvider router={routes} ></RouterProvider>
+  </ReactKeycloakProvider>
 
 );
 

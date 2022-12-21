@@ -1,5 +1,4 @@
 import { useKeycloak } from '@react-keycloak/web';
-import type { AxiosInstance } from 'axios';
 import axios from 'axios';
 import { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';

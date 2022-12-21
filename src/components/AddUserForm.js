@@ -1,4 +1,5 @@
 
+import { useKeycloak } from "@react-keycloak/web";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
@@ -11,6 +12,7 @@ const AddUserForm = () => {
   } = useForm({
     mode: "onChange",
   });
+  const {keycloak ,intialized} = useKeycloak();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -32,7 +34,7 @@ const AddUserForm = () => {
         <div className="text-gray-400 fw-bold fs-4">
           {/* Link here */}
           <div
-            to="/auth/login"
+            onClick={()=>keycloak.login({redirectUri:window.location.origin+"/"})}
             className="link-primary fw-bolder"
             style={{ marginLeft: "5px" }}
           >

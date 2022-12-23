@@ -1,8 +1,8 @@
 
 import { useKeycloak } from "@react-keycloak/web";
-import React, { useEffect } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
-import {registerUser} from "../services/userService";
+import {registerUser} from "../../services/userService";
 
 const AddUserForm = () => {
   const {
@@ -62,7 +62,7 @@ const AddUserForm = () => {
             htmlFor="firstName"
             className="form-label fw-bolder text-dark fs-6"
           >
-            First name
+            First name*
           </label>
           <input
             placeholder="First name"
@@ -76,7 +76,7 @@ const AddUserForm = () => {
               },
             })}
             className={`form-control form-control-lg form-control-solid ${
-              errors.firstName ? "is-invalid" : "is-valid"
+              errors.firstName ? "is-invalid" : ""
             }`}
           />
           {errors.firstName && (
@@ -92,7 +92,7 @@ const AddUserForm = () => {
           {/* begin::Form group Lastname */}
           <div className="fv-row mb-5">
             <label className="form-label fw-bolder text-dark fs-6">
-              Last name
+              Last name*
             </label>
             <input
               placeholder="Last name"
@@ -106,7 +106,7 @@ const AddUserForm = () => {
                 },
               })}
               className={`form-control form-control-lg form-control-solid ${
-                errors.lastName ? "is-invalid" : "is-valid"
+                errors.lastName ? "is-invalid" : ""
               }`}
             />
             {errors.lastName && (
@@ -125,7 +125,7 @@ const AddUserForm = () => {
       {/* begin::Form group Firstname */}
       <div className="row fv-row mb-7">
         <div className="col-xl-6">
-          <label className="form-label fw-bolder text-dark fs-6">Phone</label>
+          <label className="form-label fw-bolder text-dark fs-6">Phone*</label>
           <input
             placeholder="Phone"
             type="tel"
@@ -138,7 +138,7 @@ const AddUserForm = () => {
               },
             })}
             className={`form-control form-control-lg form-control-solid ${
-              errors.phone ? "is-invalid" : "is-valid"
+              errors.phone ? "is-invalid" : ""
             }`}
           />
           {errors.phone && (
@@ -153,7 +153,7 @@ const AddUserForm = () => {
           {/* begin::Form group Lastname */}
           <div className="fv-row mb-5">
             <label className="form-label fw-bolder text-dark fs-6">
-              Date Of Birth
+              Date Of Birth*
             </label>
             <input
               placeholder="Date of birth"
@@ -163,7 +163,7 @@ const AddUserForm = () => {
                 required: true,
               })}
               className={`form-control form-control-lg form-control-solid ${
-                errors.dateOfBirth ? "is-invalid" : "is-valid"
+                errors.dateOfBirth ? "is-invalid" : ""
               }`}
             />
             {errors.dateOfBirth && (
@@ -182,7 +182,7 @@ const AddUserForm = () => {
       {/* begin::Form group Email */}
       <div className="row fv-row mb-7">
         <div className="col-xl-6">
-          <label className="form-label fw-bolder text-dark fs-6">Email</label>
+          <label className="form-label fw-bolder text-dark fs-6">Email*</label>
           <input
             placeholder="Email"
             type="email"
@@ -195,7 +195,7 @@ const AddUserForm = () => {
               },
             })}
             className={`form-control form-control-lg form-control-solid ${
-              errors.email ? "is-invalid" : "is-valid"
+              errors.email ? "is-invalid" : ""
             }`}
           />
           {errors.email && (
@@ -210,7 +210,7 @@ const AddUserForm = () => {
           {/* begin::Form group Nickname */}
           <div className="fv-row mb-5">
             <label className="form-label fw-bolder text-dark fs-6">
-              Nickname
+              Nickname*
             </label>
             <input
               placeholder="Nickname"
@@ -224,7 +224,7 @@ const AddUserForm = () => {
                 },
               })}
               className={`form-control form-control-lg form-control-solid ${
-                errors.nickname ? "is-invalid" : "is-valid"
+                errors.nickname ? "is-invalid" : ""
               }`}
             />
             {errors.nickname && (
@@ -244,7 +244,7 @@ const AddUserForm = () => {
       <div className="row fv-row mb-7">
         <div className="col-xl-6">
           <label className="form-label fw-bolder text-dark fs-6">
-            Password
+            Password*
           </label>
           <div className="position-relative mb-3">
             <input
@@ -259,7 +259,7 @@ const AddUserForm = () => {
                 },
               })}
               className={`form-control form-control-lg form-control-solid ${
-                errors.password ? "is-invalid" : "is-valid"
+                errors.password ? "is-invalid" : ""
               }`}
             />
             {errors.password && (
@@ -274,7 +274,7 @@ const AddUserForm = () => {
         {/* begin::Form group Confirm password */}
         <div className="col-xl-6">
           <label className="form-label fw-bolder text-dark fs-6">
-            Confirm Password
+            Confirm Password*
           </label>
           <input
             type="password"
@@ -287,7 +287,7 @@ const AddUserForm = () => {
               },
             })}
             className={`form-control form-control-lg form-control-solid ${
-              errors.passwordConfirmation ? "is-invalid" : "is-valid"
+              errors.passwordConfirmation ? "is-invalid" : ""
             }`}
           />
           {errors.passwordConfirmation && (
@@ -306,7 +306,7 @@ const AddUserForm = () => {
       <div className="row fv-row mb-7">
         <div className="col-xl-6">
           <label className="form-label fw-bolder text-dark fs-6">
-            Are you ?
+            Are you ?*
           </label>
           <div className="position-relative mb-3">
             <select
@@ -315,7 +315,7 @@ const AddUserForm = () => {
                 required: true,
               })}
               className={`form-control form-control-lg form-control-solid ${
-                errors.role ? "is-invalid" : "is-valid"
+                errors.role ? "is-invalid" : ""
               }`}
             >
               <option value="STUDENT">Student</option>
@@ -344,7 +344,7 @@ const AddUserForm = () => {
         >
           <span className="indicator-label">Submit</span>
         </button>
-        <div to="/auth/login">
+        <div onClick={()=>keycloak.login({redirectUri:window.location.origin+"/"})}>
           <button
             type="button"
             id="kt_login_signup_form_cancel_button"

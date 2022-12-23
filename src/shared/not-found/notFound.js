@@ -1,8 +1,6 @@
 import React from 'react';
-import { Fragment } from 'react';
-import { Link, Outlet } from 'react-router-dom';
-import { Button, Col, Container } from 'react-bootstrap';
-import { toAbsoluteUrl } from '../../../_metronic/helpers';
+import { Link } from 'react-router-dom';
+import { toAbsoluteUrl } from '../helpers/AssetHelpers';
 const NotFound = () => {
   return (
     <div className='d-flex flex-column flex-root'>
@@ -14,15 +12,14 @@ const NotFound = () => {
           )}')`,
         }}>
         <div className='d-flex flex-column flex-column-fluid text-center p-10 py-lg-20'>
-          <a href='/dashboard' className='mb-10 pt-lg-20'>
-            <img
-              alt='Logo'
-              src={toAbsoluteUrl('/media/logos/logo-1.svg')}
-              className='h-50px mb-5'
-            />
-          </a>
           <div className='pt-lg-10 mb-10'>
-            <Outlet />
+            <h1 className='fw-bolder fs-4x text-gray-700 mb-10'>
+              Page Not Found
+            </h1>
+
+            <div className='fw-bold fs-3 text-gray-400 mb-15'>
+              The page you looked not found!
+            </div>
             <div className='text-center'>
               <Link to='/' className='btn btn-lg btn-primary fw-bolder'>
                 Go to homepage
@@ -44,26 +41,6 @@ const NotFound = () => {
                 '/media/illustrations/sketchy-1/17.png'
               )}')`,
             }}></div>
-        </div>
-
-        <div className='d-flex flex-center flex-column-auto p-10'>
-          <div className='d-flex align-items-center fw-bold fs-6'>
-            <a
-              href='https://keenthemes.com'
-              className='text-muted text-hover-primary px-2'>
-              About
-            </a>
-            <a
-              href='mailto:support@keenthemes.com'
-              className='text-muted text-hover-primary px-2'>
-              Contact
-            </a>
-            <a
-              href='https://1.envato.market/EA4JP'
-              className='text-muted text-hover-primary px-2'>
-              Contact Us
-            </a>
-          </div>
         </div>
       </div>
     </div>

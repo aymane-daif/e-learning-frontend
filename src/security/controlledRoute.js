@@ -7,7 +7,9 @@ const RouterContentWrapper = (props) => {
   const { keycloak } = useKeycloak();
   const isUserAuthorized =
     !props.roles || props.roles.length === 0 || hasRoles(props.roles, keycloak);
-  if (props.roles && props.roles.length > 0 && !keycloak?.authenticated) {
+  //TODO: uncomment this when dealing with roles in keycloak
+  // if (props.roles && props.roles.length > 0 && !keycloak?.authenticated) {
+  if (!keycloak?.authenticated) {
     keycloak?.login();
   }
 

@@ -15,9 +15,7 @@ function HomeStudent() {
       {/* <h1>Skill paths</h1>
       <ListPaths /> */}
       <h1>All courses</h1>
-      <div className='d-flex justify-content-center flex-wrap'>
-        <ListCourses />
-      </div>
+      <ListCourses />
 
       <ul className='pagination'>
         <li className='page-item previous'>

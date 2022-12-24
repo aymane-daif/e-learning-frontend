@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
 import CourseItem from './CourseItem';
 import { useHttpClient } from '../security/hooks/axiosProvider';
 import { KTSVG } from '../shared/helpers/KTSVG';
@@ -16,29 +14,30 @@ function ListCourses() {
   const httpClient = useHttpClient(true);
 
   const [courses, setCourses] = useState([]);
+  const [pageData, setPageData] = useState(null);
+  const [pageNumber, setPageNumber] = useState(0);
+  const [keyword, setKeyword] = useState('');
   const [isAll, setIsAll] = useState(true);
   const [isOnlyFree, setIsOnlyFree] = useState(false);
   const [isOnlyPremium, setIsOnlyPremium] = useState(false);
 
-  const getCourses = useCallback(
-    async (keyword = '') => {
-      if (keyword) setIsAll(false);
-      httpClient.current
-        ?.get(`/courses?keyword=${keyword}`)
-        .then((response) => {
-          const data = response.data;
-          setCourses(data.content);
-          console.log(data.content);
-          setIsOnlyPremium(false);
-          setIsOnlyFree(false);
-        });
-    },
-    [httpClient]
-  );
+  const getCourses = useCallback(async () => {
+    if (keyword) setIsAll(false);
+    httpClient.current
+      ?.get(`/courses?keyword=${keyword}&page=${pageNumber}`)
+      .then((response) => {
+        const data = response.data;
+        setPageData(data);
+        setCourses(data.content);
+        console.log(data);
+        setIsOnlyPremium(false);
+        setIsOnlyFree(false);
+      });
+  }, [httpClient, keyword, pageNumber]);
 
   const getCoursesByPriceType = (type) => {
     httpClient.current
-      ?.get(`/courses/filter?priceType=${type}`)
+      ?.get(`/courses/filter?priceType=${type}&page=${pageNumber}`)
       .then((response) => {
         const data = response.data;
         setCourses(data.content);
@@ -52,7 +51,8 @@ function ListCourses() {
 
   const onSubmit = (data) => {
     const key = data.search.trim();
-    getCourses(key);
+    setKeyword(key);
+    getCourses();
   };
 
   return (
@@ -99,7 +99,8 @@ function ListCourses() {
                 setIsAll(true);
                 setIsOnlyPremium(false);
                 setIsOnlyFree(false);
-                getCourses('');
+                setKeyword('');
+                getCourses();
               }}>
               Browse All
             </span>
@@ -135,7 +136,7 @@ function ListCourses() {
           </li>
         </ul>
       </div>
-      {/* done */}
+      {/* end of tabs */}
       <div className='d-flex justify-content-center flex-wrap'>
         {courses.map((course) => (
           <CourseItem
@@ -148,6 +149,41 @@ function ListCourses() {
           />
         ))}
       </div>
+
+      <ul className='pagination'>
+        <li className='page-item previous'>
+          <a href='#' className='page-link'>
+            <i className='previous'></i>
+          </a>
+        </li>
+        {new Array(pageData?.totalPages).fill(0).map((_, i) => (
+          <li
+            className={`page-item ${
+              pageData?.pageable.pageNumber === i && 'active'
+            }`}
+            key={i}>
+            <span
+              className='page-link'
+              onClick={() => {
+                setPageNumber(i);
+                if (!isOnlyPremium && !isOnlyFree) {
+                  getCourses();
+                } else {
+                  const type = isOnlyFree ? 'FREE' : 'PREMIUM';
+                  getCoursesByPriceType(type);
+                }
+              }}>
+              {i + 1}
+            </span>
+          </li>
+        ))}
+
+        <li className='page-item next'>
+          <a href='#' className='page-link'>
+            <i className='next'></i>
+          </a>
+        </li>
+      </ul>
     </>
   );
 }

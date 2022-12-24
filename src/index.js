@@ -25,12 +25,13 @@ root.render(
         <App>
           <Switch>
             {getEffectiveRoutes(routes).map(
-              ({ path, Component, exact, roles }) => (
+              ({ path, Component, WrapperComponent, exact, roles }) => (
                 <ControlledRoute
                   key={path}
                   exact={exact}
                   path={`${process.env.PUBLIC_URL}${path}`}
                   roles={roles}>
+                  <WrapperComponent />
                   <Component />
                 </ControlledRoute>
               )

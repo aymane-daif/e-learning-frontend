@@ -1,15 +1,18 @@
+import { Fragment } from 'react';
 import NotFound from '../shared/not-found/notFound';
 
 export class EffectiveRoute {
   path;
   exact;
   Component;
+  WrapperComponent;
   roles;
 
-  constructor(path, Component, roles, exact) {
+  constructor(path, Component, WrapperComponent, roles, exact) {
     this.path = path;
     this.exact = exact;
     this.Component = Component;
+    this.WrapperComponent = WrapperComponent;
     this.roles = roles;
   }
 }
@@ -32,6 +35,7 @@ function getEffectiveRoute(r) {
         return new EffectiveRoute(
           `${fullPath || ''}${r.path}${cr.path}`,
           cr.Component,
+          r.Component,
           effectiveChildRoles,
           cr.exact
         );
@@ -46,10 +50,11 @@ function getEffectiveRoute(r) {
       new EffectiveRoute(
         `${fullPath || ''}${r.path}`,
         r.Component,
+        Fragment,
         effectiveRoles.concat(r.roles || []),
         r.exact
       )
     );
   }
-  return Array.of(new EffectiveRoute('*', NotFound));
+  return Array.of(new EffectiveRoute('*', NotFound, Fragment));
 }

@@ -4,12 +4,11 @@ import { ProfileDetails } from '../components/profile/ProfileDetails';
 import ProfileOverview from '../components/profile/ProfileOverview';
 import ProfileCourses from '../components/profile/ProfileCourses';
 import HomeStudent from '../pages/Home/HomeStudent';
-import SingleCourse from '../components/SingleCourse';
+import CoursePayment from '../pages/CoursePayment';
 
 export const routes = [
   { path: '/', Component: HomeStudent, exact: true },
   { path: '/auth/register', Component: Registration, exact: true },
-  // { path: '/courses/:id', Component: CoursePayment, exact: true },
   {
     path: '/profile/*',
     children: [
@@ -22,7 +21,7 @@ export const routes = [
   },
   {
     path: '/courses/:id',
-    Component: SingleCourse,
+    Component: CoursePayment,
     exact: true,
   },
 ];

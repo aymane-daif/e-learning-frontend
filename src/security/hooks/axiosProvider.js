@@ -11,12 +11,12 @@ export const useHttpClient = (secure = true, isBlob = false) => {
   const API_URL = process.env.REACT_APP_API_URL;
 
   const dispath = useDispatch();
-  console.log("hanta");
+
   useEffect(() => {
     const headers = {
       Authorization: initialized ? `Bearer ${kcToken}` : undefined,
     };
-
+    console.log("token:"+kcToken);
     axiosInstance.current = axios.create({
       baseURL: API_URL,
       headers: secure ? headers : {},

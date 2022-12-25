@@ -60,7 +60,7 @@ function ListCourses() {
 
   useEffect(() => {
     getCourses(pageNumber);
-  }, [getCourses]);
+  }, [getCourses, pageNumber]);
 
   const onSubmit = (data) => {
     const key = data.search.trim();
@@ -155,6 +155,7 @@ function ListCourses() {
             instructorName={course.instructorDto.name}
             courseLevel={course.courseLevel}
             priceType={course.priceType}
+            id={course.id}
           />
         ))}
       </div>

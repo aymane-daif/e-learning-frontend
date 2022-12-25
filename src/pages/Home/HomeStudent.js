@@ -1,7 +1,6 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import ListCourses from '../../components/ListCourses';
-import ListPaths from '../../components/ListPaths';
 
 function HomeStudent() {
   return (

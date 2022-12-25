@@ -16,7 +16,6 @@ export const useHttpClient = (secure = true, isBlob = false) => {
     const headers = {
       Authorization: initialized ? `Bearer ${kcToken}` : undefined,
     };
-
     axiosInstance.current = axios.create({
       baseURL: API_URL,
       headers: secure ? headers : {},

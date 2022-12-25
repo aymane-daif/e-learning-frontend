@@ -5,7 +5,6 @@ import ProfileOverview from '../components/profile/ProfileOverview';
 import ProfileCourses from '../components/profile/ProfileCourses';
 import HomeStudent from '../pages/Home/HomeStudent';
 import CoursePayment from '../pages/CoursePayment';
-import SingleCourse from '../components/SingleCourse';
 
 export const routes = [
   { path: '/', Component: HomeStudent, exact: true },
@@ -21,4 +20,10 @@ export const routes = [
     Component: ProfilePage,
     exact: false,
   },
+  {
+    path: '/courses/:id',
+    Component: CoursePayment,
+    exact: true,
+  },
+
 ];

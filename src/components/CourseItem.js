@@ -1,11 +1,13 @@
 import React from 'react';
 import Badge from 'react-bootstrap/Badge';
+import { Link } from 'react-router-dom';
 import {
   fromLevelToColor,
   fromPriceToColor,
 } from '../shared/helpers/customClass';
 
 function CourseItem({
+  id,
   name,
   description,
   instructorName,
@@ -86,11 +88,11 @@ function CourseItem({
               </span>
             </div>
 
-            <a
-              href='#'
+            <Link
+              to={`/courses/${id}`}
               className='btn btn-sm btn-light btn-color-muted px-4 py-2'>
               Preview
-            </a>
+            </Link>
           </div>
           {/* end::Toolbar */}
         </div>

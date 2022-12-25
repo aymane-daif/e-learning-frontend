@@ -1,19 +1,27 @@
-import { createBrowserRouter } from "react-router-dom";
-import ListCourses from "../components/ListCourses";
-import Home from "../pages/Home";
-import Registration from "../pages/auth/Registration";
-import ProfilePage from "../pages/profile/ProfilePage";
-import { ProfileHeader } from "../components/profile/ProfileHeader";
+import Registration from '../pages/auth/Registration';
+import ProfilePage from '../pages/profile/ProfilePage';
+import { ProfileDetails } from '../components/profile/ProfileDetails';
+import ProfileOverview from '../components/profile/ProfileOverview';
+import ProfileCourses from '../components/profile/ProfileCourses';
+import HomeStudent from '../pages/Home/HomeStudent';
+import SingleCourse from '../components/SingleCourse';
 
-export const routes = createBrowserRouter([
-  { path: "/", element: <ListCourses />, exact: false },
-  { path: "/auth/register", element: <Registration />, exact: false },
+export const routes = [
+  { path: '/', Component: HomeStudent, exact: true },
+  { path: '/auth/register', Component: Registration, exact: true },
   {
-    path: "/profile/*",
+    path: '/profile/*',
     children: [
-      { path: "settings", element: <ProfileHeader />, exact: false },
+      { path: 'settings', Component: ProfileDetails, exact: true },
+      { path: 'overview', Component: ProfileOverview, exact: true },
+      { path: 'courses', Component: ProfileCourses, exact: true },
     ],
-    element: <ProfilePage />,
+    Component: ProfilePage,
     exact: false,
   },
-]);
+  {
+    path: '/courses/:id',
+    Component: SingleCourse,
+    exact: true,
+  },
+];

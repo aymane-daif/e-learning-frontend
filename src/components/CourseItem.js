@@ -1,9 +1,21 @@
 import React from 'react';
-import Card from 'react-bootstrap/Card';
+import Badge from 'react-bootstrap/Badge';
+import { Link } from 'react-router-dom';
+import {
+  fromLevelToColor,
+  fromPriceToColor,
+} from '../shared/helpers/customClass';
 
-function CourseItem() {
+function CourseItem({
+  id,
+  name,
+  description,
+  instructorName,
+  courseLevel,
+  priceType,
+}) {
   return (
-    <div className='card mb-5 mb-xxl-8`'>
+    <div className='card mb-5 mb-xxl-8 bg-dark m-3' style={{ width: '26rem' }}>
       {/* begin::Body */}
       <div className='card-body pb-0'>
         {/* begin::Header */}
@@ -21,10 +33,15 @@ function CourseItem() {
               <a
                 href='#'
                 className='text-gray-800 text-hover-primary fs-6 fw-bolder'>
-                Sam Logan
+                {instructorName}
               </a>
 
-              <span className='text-gray-400 fw-bold'>Mango, Java, Python</span>
+              <span className='text-gray-400 fw-bold'>
+                {' '}
+                <Badge pill bg={`${fromPriceToColor(priceType)}`}>
+                  {priceType}
+                </Badge>
+              </span>
             </div>
             {/* end::Info */}
           </div>
@@ -56,27 +73,26 @@ function CourseItem() {
           {/* end::Image */}
 
           {/* begin::Text */}
-          <div className='text-gray-800 mb-5'>
-            Outlines keep you honest. They stop you from indulging in poorly
-            thought-out metaphors about driving and keep you focused on the
-            overall structure of your post
-          </div>
+          <h3 className='mb-5'>{name}</h3>
+          <div className='text-gray-800 mb-5'>{description}</div>
           {/* end::Text */}
 
           {/* begin::Toolbar */}
           <div className='d-flex align-items-center justify-content-between mb-5'>
             <div className='card-toolbar'>
               <span
-                className={`badge badge-light-success fw-bolder me-auto px-4 py-3`}>
-                Beginner
+                className={`badge badge-${fromLevelToColor(
+                  courseLevel
+                )} fw-bolder me-auto px-4 py-3`}>
+                {courseLevel}
               </span>
             </div>
 
-            <a
-              href='#'
+            <Link
+              to={`/courses/${id}`}
               className='btn btn-sm btn-light btn-color-muted px-4 py-2'>
               Preview
-            </a>
+            </Link>
           </div>
           {/* end::Toolbar */}
         </div>

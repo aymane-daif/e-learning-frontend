@@ -21,38 +21,51 @@ function ListCourses() {
   const [isOnlyFree, setIsOnlyFree] = useState(false);
   const [isOnlyPremium, setIsOnlyPremium] = useState(false);
 
-  const getCourses = useCallback(async () => {
-    if (keyword) setIsAll(false);
-    httpClient.current
-      ?.get(`/courses?keyword=${keyword}&page=${pageNumber}`)
-      .then((response) => {
-        const data = response.data;
-        setPageData(data);
-        setCourses(data.content);
-        console.log(data);
-        setIsOnlyPremium(false);
-        setIsOnlyFree(false);
-      });
-  }, [httpClient, keyword, pageNumber]);
+  const getCourses = useCallback(
+    (i) => {
+      if (keyword) setIsAll(false);
+      else setIsAll(true);
+      httpClient.current
+        ?.get(`/courses?keyword=${keyword}&page=${i}`)
+        .then((response) => {
+          const data = response.data;
+          setPageData(data);
+          setCourses(data.content);
+          console.log(data);
+          setIsOnlyPremium(false);
+          setIsOnlyFree(false);
+        });
+    },
+    [httpClient, keyword]
+  );
 
   const getCoursesByPriceType = (type) => {
     httpClient.current
-      ?.get(`/courses/filter?priceType=${type}&page=${pageNumber}`)
+      ?.get(`/courses/filter?priceType=${type}`)
       .then((response) => {
         const data = response.data;
-        setCourses(data.content);
-        console.log(data.content);
+        console.log(data);
+        setCourses(data);
+        setPageData(null);
+        setIsAll(false);
+        if (type === 'PREMIUM') {
+          setIsOnlyPremium(true);
+          setIsOnlyFree(false);
+        } else {
+          setIsOnlyPremium(false);
+          setIsOnlyFree(true);
+        }
       });
   };
 
   useEffect(() => {
-    getCourses();
+    getCourses(pageNumber);
   }, [getCourses]);
 
   const onSubmit = (data) => {
     const key = data.search.trim();
     setKeyword(key);
-    getCourses();
+    getCourses(pageNumber);
   };
 
   return (
@@ -96,11 +109,9 @@ function ListCourses() {
                 `nav-link text-active-primary me-6 ` + (isAll && 'active')
               }
               onClick={() => {
-                setIsAll(true);
-                setIsOnlyPremium(false);
-                setIsOnlyFree(false);
+                setPageNumber(0);
                 setKeyword('');
-                getCourses();
+                getCourses(0);
               }}>
               Browse All
             </span>
@@ -112,9 +123,8 @@ function ListCourses() {
                 (isOnlyPremium && 'active')
               }
               onClick={() => {
-                setIsOnlyPremium(true);
-                setIsAll(false);
-                setIsOnlyFree(false);
+                setPageNumber(0);
+                setKeyword('');
                 getCoursesByPriceType('PREMIUM');
               }}>
               Premium
@@ -126,9 +136,8 @@ function ListCourses() {
                 `nav-link text-active-primary me-6 ` + (isOnlyFree && 'active')
               }
               onClick={() => {
-                setIsOnlyFree(true);
-                setIsAll(false);
-                setIsOnlyPremium(false);
+                setPageNumber(0);
+                setKeyword('');
                 getCoursesByPriceType('FREE');
               }}>
               Free
@@ -149,41 +158,24 @@ function ListCourses() {
           />
         ))}
       </div>
-
-      <ul className='pagination'>
-        <li className='page-item previous'>
-          <a href='#' className='page-link'>
-            <i className='previous'></i>
-          </a>
-        </li>
-        {new Array(pageData?.totalPages).fill(0).map((_, i) => (
-          <li
-            className={`page-item ${
-              pageData?.pageable.pageNumber === i && 'active'
-            }`}
-            key={i}>
-            <span
-              className='page-link'
+      {pageData && (
+        <ul className='pagination'>
+          {new Array(pageData?.totalPages).fill(0).map((_, i) => (
+            <li
+              className={`page-item ${pageNumber === i && 'active'}`}
+              key={i}
               onClick={() => {
                 setPageNumber(i);
-                if (!isOnlyPremium && !isOnlyFree) {
-                  getCourses();
-                } else {
-                  const type = isOnlyFree ? 'FREE' : 'PREMIUM';
-                  getCoursesByPriceType(type);
-                }
+                getCourses(i);
+                setIsAll(true);
+                setIsOnlyPremium(false);
+                setIsOnlyFree(false);
               }}>
-              {i + 1}
-            </span>
-          </li>
-        ))}
-
-        <li className='page-item next'>
-          <a href='#' className='page-link'>
-            <i className='next'></i>
-          </a>
-        </li>
-      </ul>
+              <span className='page-link'>{i + 1}</span>
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 }

@@ -5,7 +5,6 @@ import ProfileOverview from '../components/profile/ProfileOverview';
 import ProfileCourses from '../components/profile/ProfileCourses';
 import HomeStudent from '../pages/Home/HomeStudent';
 import CoursePayment from '../pages/CoursePayment';
-import StudentNavbar from '../components/bars/StudentNavbar';
 
 export const routes = [
   { path: '/auth/register', Component: Registration, exact: true },
@@ -26,11 +25,6 @@ export const routes = [
     path: '/courses/:id',
     Component: CoursePayment,
     exact: true,
-  },
-  {
-    path: "/navbar",
-    Component: StudentNavbar,
-    exact: true
   }
 
 ];

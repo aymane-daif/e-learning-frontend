@@ -1,0 +1,95 @@
+
+
+nav{
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.list-container{
+    display:flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list-item{
+    font-size: 20px;
+    margin-left: 15px;
+    cursor: pointer;
+    padding: 10px 20px;
+    color:#5e6278;
+    border-radius: 5px;
+    transition: color 0.2s ease-in-out;
+}
+
+.list-item:hover{
+    background-color: #eff2f5;
+    color:#009ef7
+}
+
+.user-image{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    border:solid 2px #009ef7;
+    background-color: #eff2f5;
+}
+
+.hidden-nav{
+    z-index: 12;
+    position: fixed;
+    min-width: 250px;
+    padding: 20px 0;
+    background-color: white;
+    top:100px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgb(224, 224, 224);
+    transform: translateY(-20px);
+    transition: opacity,transform 0.3s ease;
+    opacity: 0;
+}
+
+.username,.email{
+    font-weight: 600;
+    font-size: 14px;
+}
+.email{
+    color: gray;
+    font-size: 13px;
+}
+
+.list-item-hidden{
+    list-style: none;
+    width: 100%;
+    margin: 0;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 5px  0px 5px 20px;
+    color:#5e6278;
+    border-radius: 5px;
+    transition: color 0.2s ease-in-out;
+}
+
+.list-item-hidden:hover{
+    background-color: #eff2f5;
+    color:#009ef7
+}
+
+
+.visible-nav{
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.navbar-shadow{
+    box-shadow: 0px 0px 10px rgb(236, 236, 236);
+}
+
+.place-holder{
+    margin-top: 100px;
+}

@@ -25,7 +25,6 @@ function ListCourses() {
     (i) => {
       if (keyword) setIsAll(false);
       else setIsAll(true);
-      console.log("sending............")
       httpClient.current
         ?.get(`/courses?keyword=${keyword}&page=${i}`)
         .then((response) => {

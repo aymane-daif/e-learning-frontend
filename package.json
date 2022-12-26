@@ -37,6 +37,7 @@
     "react-stripe-checkout": "^2.6.3",
     "reactstrap": "^9.1.5",
     "redux": "^4.2.0",
+    "clsx": "^1.1.1",
     "sass": "^1.56.2",
     "socicon": "^3.0.5",
     "web-vitals": "^2.1.4"

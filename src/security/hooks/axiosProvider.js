@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { spinnerActions } from '../../store/redux/spinnerSlice';
 
 export const useHttpClient = (secure = true, isBlob = false) => {
+  
   const axiosInstance = useRef();
   const { keycloak, initialized } = useKeycloak();
   const kcToken = keycloak?.token ?? '';

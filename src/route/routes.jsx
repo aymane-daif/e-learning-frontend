@@ -7,9 +7,10 @@ import HomeStudent from '../pages/Home/HomeStudent';
 import CoursePayment from '../pages/CoursePayment';
 
 export const routes = [
-  { path: '/', Component: HomeStudent, exact: true },
   { path: '/auth/register', Component: Registration, exact: true },
   { path: '/courses/:id', Component: CoursePayment, exact: true },
+  { path: '/',
+   Component: HomeStudent, exact: true },
   {
     path: '/profile/*',
     children: [
@@ -24,6 +25,6 @@ export const routes = [
     path: '/courses/:id',
     Component: CoursePayment,
     exact: true,
-  },
+  }
 
 ];

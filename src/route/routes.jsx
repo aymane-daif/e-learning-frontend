@@ -9,7 +9,8 @@ import CoursePayment from '../pages/CoursePayment';
 export const routes = [
   { path: '/auth/register', Component: Registration, exact: true },
   { path: '/courses/:id', Component: CoursePayment, exact: true },
-  { path: '/', Component: HomeStudent, exact: true },
+  { path: '/',
+   Component: HomeStudent, exact: true },
   {
     path: '/profile/*',
     children: [
@@ -19,5 +20,5 @@ export const routes = [
     ],
     Component: ProfilePage,
     exact: false,
-  },
+  }
 ];

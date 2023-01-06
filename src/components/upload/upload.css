@@ -36,6 +36,7 @@
     box-shadow: var(--box-shadow);
     display: flex;
     flex-direction: column;
+    gap: 2em;
     width: 60%;
     align-items: center;
     justify-content: center;

@@ -5,9 +5,10 @@ import ProfileOverview from '../components/profile/ProfileOverview';
 import ProfileCourses from '../components/profile/ProfileCourses';
 import HomeStudent from '../pages/Home/HomeStudent';
 import SingleCourse from '../components/SingleCourse';
+import Upload from '../components/upload/Upload';
 
 export const routes = [
-  { path: '/', Component: HomeStudent, exact: true },
+  { path: '/', Component: Upload, exact: true },
   { path: '/auth/register', Component: Registration, exact: true },
   {
     path: '/profile/*',

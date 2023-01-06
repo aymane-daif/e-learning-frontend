@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import {
   fromLevelToColor,
   fromPriceToColor,
-} from '../shared/helpers/customClass';
+} from '../../shared/helpers/customClass';
 
 function CourseItem({
   id,

@@ -62,3 +62,13 @@
 .c-content-container{
     margin-left:30px;
 }
+
+.play-icon{
+    color: #a435f0;
+    cursor: pointer;
+}
+
+.vedio-title{
+    cursor: pointer;
+    text-decoration: underline;
+}

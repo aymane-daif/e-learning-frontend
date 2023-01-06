@@ -1,5 +1,4 @@
 import { useKeycloak } from '@react-keycloak/web';
-
 import Loader from './shared/loader/loader';
 
 function App({ children }) {

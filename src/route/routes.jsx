@@ -20,11 +20,5 @@ export const routes = [
     ],
     Component: ProfilePage,
     exact: false,
-  },
-  {
-    path: '/courses/:id',
-    Component: CoursePayment,
-    exact: true,
   }
-
 ];

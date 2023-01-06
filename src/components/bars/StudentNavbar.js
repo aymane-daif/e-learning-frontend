@@ -1,4 +1,3 @@
-import { isVisible } from "@testing-library/user-event/dist/utils";
 import React, { useState } from "react";
 
 import "../../style/studentNavbar.css";
@@ -16,7 +15,7 @@ function StudentNavbar(){
         <>
           <div className="place-holder" ></div>
           <nav className="d-flex justify-content-around 
-      align-items-center py-4 border-bottom border-3 navbar-shadow bg-white col-12">
+      align-items-center py-2 border-bottom border-3 navbar-shadow bg-white col-12">
 
         <ul className="list-container my-0">
           <li className="list-item">Home</li>

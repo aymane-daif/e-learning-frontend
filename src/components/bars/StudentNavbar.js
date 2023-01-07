@@ -1,63 +1,109 @@
 import React, { useState } from 'react';
+import { useKeycloak } from '@react-keycloak/web';
 import { NavLink } from 'react-router-dom';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import Container from 'react-bootstrap/Container';
+import { useSelector } from 'react-redux';
 
 import '../../style/studentNavbar.css';
 
 function StudentNavbar() {
+  const { keycloak } = useKeycloak();
+
+  const user = useSelector((state) => state.user.user);
+
   const [navIsVisible, setNavIsVisible] = useState(false);
 
-  function toggleNavBarVisiblity() {
+  function toggleNavBarVisibility() {
     setNavIsVisible((previousState) => !previousState);
   }
 
   return (
     <>
-      <div className='place-holder'></div>
-      <nav
-        className='d-flex justify-content-around 
-      align-items-center py-2 border-bottom border-3 navbar-shadow bg-white col-12'>
-        <ul className='list-container my-0'>
-          <li className='list-item'>
-            <NavLink to='/' className='nav-link'>
+      <Navbar fixed='top' bg='dark' variant='dark' expand='lg'>
+        <Container>
+          <Nav className='me-auto'>
+            <NavLink
+              exact
+              to='/'
+              className={({ isActive }) =>
+                isActive ? 'list-item nav-link' : 'nav-link'
+              }>
               Home
             </NavLink>
-          </li>
-          <li className='list-item'>
-            <NavLink to='/profile/overview' className='nav-link'>
+            <NavLink
+              exact
+              to='/profile/overview'
+              className={({ isActive }) =>
+                isActive ? 'list-item nav-link' : 'nav-link'
+              }>
               Profile
             </NavLink>
-          </li>
-          <li className='list-item'>Courses</li>
-          <li className='list-item'>Certifications</li>
-        </ul>
-
-        {/* <div className="d-flex justify-content-end">
-          <img className="user-image" onClick={()=>toggleNavBarVisiblity()} src={"https://avatars.dicebear.com/api/adventurer/aa.svg"} />
-          
-          <div className={"hidden-nav px-3"+(navIsVisible?" visible-nav":"")}>
-
-            <div className="d-flex justify-content-center
-            align-items-center pb-3 border-bottom">
-                <img className="user-image" src={"https://avatars.dicebear.com/api/adventurer/aa.svg"} />
-                <div className="ms-3">
-                  <div className="username">abdelali el hammadi</div>
-                  <div className="mt-1 email">a@gmail.com</div>
+            <NavLink
+              exact
+              to='/profile/courses'
+              className={({ isActive }) =>
+                isActive ? 'list-item nav-link' : 'nav-link'
+              }>
+              Courses
+            </NavLink>
+          </Nav>
+          <div className='d-flex justify-content-end'>
+            <img
+              className='user-image'
+              onClick={() => toggleNavBarVisibility()}
+              src={'https://avatars.dicebear.com/api/adventurer/aa.svg'}
+              alt='avatar'
+            />
+            {navIsVisible && (
+              <div
+                className={
+                  'hidden-nav px-3' + (navIsVisible ? ' visible-nav' : '')
+                }>
+                <div
+                  className='d-flex justify-content-center
+            align-items-center pb-3 border-bottom'>
+                  <img
+                    className='user-image'
+                    src={'https://avatars.dicebear.com/api/adventurer/aa.svg'}
+                    alt='avatar'
+                  />
+                  <div className='ms-3'>
+                    <div className='username'>{user.nickname}</div>
+                    <div className='mt-1 email'>{user.email}</div>
+                  </div>
                 </div>
-            </div>
 
-            <ul className="mt-3 list-container flex-column pb-3
-            border-bottom">
-              <li className="list-item-hidden">Home</li>
-              <li className="list-item-hidden">My Profile</li>
-              <li className="list-item-hidden">My Courses</li>
-              <li className="list-item-hidden">My Certifications</li>
-            </ul>
+                <ul
+                  className='mt-3 list-container flex-column pb-3
+            border-bottom'>
+                  <NavLink
+                    exact
+                    to='/profile/settings'
+                    className='list-item-hidden'>
+                    Settings
+                  </NavLink>
+                  <NavLink
+                    exact
+                    to='/certifications'
+                    className='list-item-hidden'>
+                    My Certifications
+                  </NavLink>
+                </ul>
 
-            <div className="list-item-hidden mt-3">Sign out</div>
-
+                <div
+                  className='list-item-hidden mt-3'
+                  onClick={() => {
+                    keycloak.logout();
+                  }}>
+                  Sign out
+                </div>
+              </div>
+            )}
           </div>
-        </div> */}
-      </nav>
+        </Container>
+      </Navbar>
     </>
   );
 }

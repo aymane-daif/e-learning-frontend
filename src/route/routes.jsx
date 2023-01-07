@@ -3,17 +3,17 @@ import ProfilePage from '../pages/profile/ProfilePage';
 import { ProfileDetails } from '../components/profile/ProfileDetails';
 import ProfileOverview from '../components/profile/ProfileOverview';
 import ProfileCourses from '../components/profile/ProfileCourses';
-import HomeStudent from '../pages/Home/HomeStudent';
 import CoursePayment from '../pages/CoursePayment';
 import ShoppingCart from '../components/courses/ShoppingCart';
 import VideoLessons from '../components/videos/VideoLessons';
+import Home from '../pages/Home';
 
 export const routes = [
+  { path: '/', Component: Home, exact: true },
   { path: '/auth/register', Component: Registration, exact: true },
   { path: '/courses/:id', Component: CoursePayment, exact: true },
   { path: '/cart', Component: ShoppingCart, exact: true },
   { path: '/videos', Component: VideoLessons, exact: true },
-  { path: '/', Component: HomeStudent, exact: true },
   {
     path: '/profile/*',
     children: [

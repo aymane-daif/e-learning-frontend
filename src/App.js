@@ -1,6 +1,7 @@
 import { useKeycloak } from '@react-keycloak/web';
 import Loader from './shared/loader/loader';
 import StudentNavbar from './components/bars/StudentNavbar';
+import { Container } from 'react-bootstrap';
 function App({ children }) {
   const { initialized } = useKeycloak();
 
@@ -11,7 +12,7 @@ function App({ children }) {
   return (
     <>
       <StudentNavbar></StudentNavbar>
-      {children}
+      <Container style={{ marginTop: '6rem' }}>{children}</Container>
     </>
   );
 }

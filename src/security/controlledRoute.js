@@ -1,5 +1,4 @@
 import { useKeycloak } from '@react-keycloak/web';
-import React from 'react';
 import { Route } from 'react-router';
 import hasRoles from './hasRoles';
 

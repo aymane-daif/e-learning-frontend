@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  Container,
   Row,
   Col,
   Card,
@@ -59,59 +58,55 @@ const ShoppingCart = () => {
   }
 
   return (
-    <Container>
-      <Row>
-        <Col sm='8'>
-          <h3>Shopping Cart</h3>
-          <ListGroup>
-            {courses.map((course) => (
-              <Card key={course.id} style={{ marginBottom: '1.25rem' }}>
-                <Row>
-                  <Col sm='2'>
-                    <div className='symbol symbol-100px'>
-                      <img src='/img-16.jpg' alt='' />
-                    </div>
-                  </Col>
-                  <Col sm='7'>
-                    <CardBody className='p-0 h-100 d-flex flex-column align-items-start justify-content-center'>
-                      <CardTitle tag='h5' className='mb-2'>
-                        {course.name}
-                      </CardTitle>
-                      <CardSubtitle className='mb-2'>
-                        By {course.instructorDto.name}
-                      </CardSubtitle>
-                      <Badge
-                        pill
-                        bg={`${fromLevelToColor(course.courseLevel)}`}>
-                        {course.courseLevel}
-                      </Badge>
-                    </CardBody>
-                  </Col>
-                  <Col sm='3'>
-                    <CardFooter className='p-0 h-100 d-flex flex-column align-items-center justify-content-center'>
-                      <Badge pill bg='info'>
-                        ${course.price}
-                      </Badge>
-                      <span
-                        className='text-danger customBtn mt-2'
-                        onClick={() => removeFromCart(course.id)}>
-                        Remove
-                      </span>
-                    </CardFooter>
-                  </Col>
-                </Row>
-              </Card>
-            ))}
-          </ListGroup>
-        </Col>
-        <Col sm='4'>
-          <h3>Total: ${total}</h3>
-          <StripeCheckout stripeKey={stripeKey} token={makePayment}>
-            <Button color='success'>Checkout</Button>
-          </StripeCheckout>
-        </Col>
-      </Row>
-    </Container>
+    <Row>
+      <Col sm='8'>
+        <h3>Shopping Cart</h3>
+        <ListGroup>
+          {courses.map((course) => (
+            <Card key={course.id} style={{ marginBottom: '1.25rem' }}>
+              <Row>
+                <Col sm='2'>
+                  <div className='symbol symbol-100px'>
+                    <img src='/img-16.jpg' alt='' />
+                  </div>
+                </Col>
+                <Col sm='7'>
+                  <CardBody className='p-0 h-100 d-flex flex-column align-items-start justify-content-center'>
+                    <CardTitle tag='h5' className='mb-2'>
+                      {course.name}
+                    </CardTitle>
+                    <CardSubtitle className='mb-2'>
+                      By {course.instructorDto.name}
+                    </CardSubtitle>
+                    <Badge pill bg={`${fromLevelToColor(course.courseLevel)}`}>
+                      {course.courseLevel}
+                    </Badge>
+                  </CardBody>
+                </Col>
+                <Col sm='3'>
+                  <CardFooter className='p-0 h-100 d-flex flex-column align-items-center justify-content-center'>
+                    <Badge pill bg='info'>
+                      ${course.price}
+                    </Badge>
+                    <span
+                      className='text-danger customBtn mt-2'
+                      onClick={() => removeFromCart(course.id)}>
+                      Remove
+                    </span>
+                  </CardFooter>
+                </Col>
+              </Row>
+            </Card>
+          ))}
+        </ListGroup>
+      </Col>
+      <Col sm='4'>
+        <h3>Total: ${total}</h3>
+        <StripeCheckout stripeKey={stripeKey} token={makePayment}>
+          <Button color='success'>Checkout</Button>
+        </StripeCheckout>
+      </Col>
+    </Row>
   );
 };
 

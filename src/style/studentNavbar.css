@@ -14,8 +14,8 @@ nav {
   margin: 0;
 }
 
-.list-item {
-  font-size: 18px;
+.nav-link {
+  font-size: 16px;
   margin-left: 15px;
   cursor: pointer;
   padding: 5px 20px;
@@ -24,9 +24,9 @@ nav {
   transition: color 0.2s ease-in-out;
 }
 
-.list-item:hover {
-  background-color: #eff2f5;
-  color: #009ef7;
+.nav-link:hover {
+  background-color: #009ef7;
+  color: #eff2f5;
 }
 
 .user-image {

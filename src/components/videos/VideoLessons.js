@@ -1,67 +1,237 @@
-import React from 'react';
-import { ListGroup, ListGroupItem, Card, Row, Col } from 'react-bootstrap';
-import { KTSVG } from '../../shared/helpers/KTSVG';
-
+import React, { useState } from 'react';
+import {
+  ListGroup,
+  ListGroupItem,
+  Card,
+  Row,
+  Col,
+  Button,
+} from 'react-bootstrap';
+import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
+import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
+import CircleIcon from '@mui/icons-material/Circle';
+const course = {
+  id: 5,
+  name: 'Build an app with ASPNET Core and Angular from scratch',
+  description:
+    'A practical example of how to build an application with ASP.NET Core API and Angular from start to finish',
+  price: 700,
+  image: null,
+  noStudents: 70,
+  lastUpdated: '2023-01-06T23:00:00.000+00:00',
+  courseLevel: 'INTERMEDIATE',
+  priceType: 'PREMIUM',
+  instructorDto: {
+    id: 2,
+    name: 'Billy Abbie',
+    noCourses: 2,
+  },
+  sectionDtos: [
+    {
+      id: 21,
+      name: 'Introduction to ASP.NET',
+      lessonsDtos: [
+        {
+          id: 76,
+          name: 'ASP.NET with Angular and Authentication',
+          lessonType: 'VIDEO',
+          done: false,
+        },
+        {
+          id: 75,
+          name: 'ASP.NET with Angular and Entity Framework',
+          lessonType: 'VIDEO',
+          done: false,
+        },
+      ],
+    },
+    {
+      id: 20,
+      name: 'Introduction to Angular',
+      lessonsDtos: [
+        {
+          id: 67,
+          name: 'Components and Templates in ASP.NET with Angular',
+          lessonType: 'VIDEO',
+          done: false,
+        },
+        {
+          id: 71,
+          name: 'Forms and Validation in ASP.NET with Angular',
+          lessonType: 'VIDEO',
+          done: false,
+        },
+        {
+          id: 73,
+          name: 'Pipes and Custom Directives in ASP.NET with Angular',
+          lessonType: 'VIDEO',
+          done: false,
+        },
+        {
+          id: 68,
+          name: 'Data Binding and Directives in ASP.NET with Angular',
+          lessonType: 'VIDEO',
+          done: false,
+        },
+        {
+          id: 74,
+          name: 'Unit Testing and Deployment in ASP.NET with Angular',
+          lessonType: 'VIDEO',
+          done: false,
+        },
+        {
+          id: 70,
+          name: 'Routing and Navigation in ASP.NET with Angular',
+          lessonType: 'VIDEO',
+          done: false,
+        },
+        {
+          id: 66,
+          name: 'Setting up an ASP.NET with Angular Project',
+          lessonType: 'VIDEO',
+          done: false,
+        },
+        {
+          id: 69,
+          name: 'Services and Dependency Injection in ASP.NET with Angular',
+          lessonType: 'VIDEO',
+          done: false,
+        },
+        {
+          id: 72,
+          name: 'HttpClient and Observables in ASP.NET with Angular',
+          lessonType: 'VIDEO',
+          done: false,
+        },
+        {
+          id: 65,
+          name: 'Introduction to ASP.NET with Angular',
+          lessonType: 'VIDEO',
+          done: false,
+        },
+      ],
+    },
+    {
+      id: 22,
+      name: 'Integrate ASP.NET with Angular',
+      lessonsDtos: [
+        {
+          id: 78,
+          name: 'ASP.NET with Angular and Serverless Functions',
+          lessonType: 'VIDEO',
+          done: false,
+        },
+        {
+          id: 79,
+          name: 'ASP.NET with Angular and SignalR',
+          lessonType: 'VIDEO',
+          done: false,
+        },
+        {
+          id: 77,
+          name: 'ASP.NET with Angular and Deployment to Azure',
+          lessonType: 'VIDEO',
+          done: false,
+        },
+      ],
+    },
+    {
+      id: 23,
+      name: 'Project using ASP.NET with Angular',
+      lessonsDtos: [
+        {
+          id: 80,
+          name: 'ASP.NET with Angular and TypeScript',
+          lessonType: 'VIDEO',
+          done: false,
+        },
+        {
+          id: 83,
+          name: 'Advanced Topics in ASP.NET with Angular',
+          lessonType: 'VIDEO',
+          done: false,
+        },
+        {
+          id: 82,
+          name: 'ASP.NET with Angular and PWA',
+          lessonType: 'VIDEO',
+          done: false,
+        },
+        {
+          id: 81,
+          name: 'ASP.NET with Angular and GraphQL',
+          lessonType: 'VIDEO',
+          done: false,
+        },
+      ],
+    },
+  ],
+};
 const VideoLessons = () => {
-  const videos = [
-    { id: 1, title: 'Video 1', sectionId: 1, videoLength: '14;10' },
-    { id: 2, title: 'Video 2', sectionId: 1, videoLength: '10;23' },
-    { id: 3, title: 'Video 3', sectionId: 2, videoLength: '12;45' },
-    { id: 4, title: 'Video 4', sectionId: 2, videoLength: '9;40' },
-    { id: 5, title: 'Video 5', sectionId: 3, videoLength: '16;18' },
-  ];
+  const [currentVideo, setCurrentVideo] = useState(
+    course.sectionDtos[0].lessonsDtos[0]
+  );
 
-  const sections = [
-    { id: 1, title: 'Section 1' },
-    { id: 2, title: 'Section 2' },
-    { id: 3, title: 'Section 3' },
-  ];
   return (
     <div className='container-fluid p-0'>
       <div className='row'>
         <div className='col-md-3'>
           <Card className='bg-light mb-3'>
-            <Card.Header className='font-weight-bold text-uppercase'>
-              Videos
-            </Card.Header>
+            <h1 className='font-weight-bold'>{course.name}</h1>
             <ListGroup variant='flush'>
-              {sections.map((section) => (
+              {course.sectionDtos.map((section) => (
                 <ListGroupItem key={section.id} className='pb-2'>
-                  <h6 className='font-weight-bold mb-2'>{section.title}</h6>
-                  {videos
-                    .filter((video) => video.sectionId === section.id)
-                    .map((video) => (
-                      <Card key={video.id} className='mb-2'>
-                        <Card.Body className='py-2 px-0'>
-                          <Row className='d-flex align-items-center py-2'>
-                            <Col sm='1'>
-                              <KTSVG
-                                path='/media/icons/duotune/general/circle.svg'
-                                className='svg-icon-2 svg-icon-lg-1 svg-icon-gray-500'
-                              />
-                            </Col>
-                            <Col
-                              sm='11'
-                              className='d-flex align-items-baseline'>
-                              {' '}
-                              <KTSVG
-                                path='/media/icons/duotune/general/video.svg'
-                                className='svg-icon-2 svg-icon-lg-1 svg-icon-gray-500'
-                              />
-                              <Card.Subtitle>
-                                {video.title}({video.videoLength})
-                              </Card.Subtitle>
-                            </Col>
-                          </Row>
-                        </Card.Body>
-                      </Card>
-                    ))}
+                  <h6 className='font-weight-bold my-2'>{section.name}</h6>
+                  {section.lessonsDtos.map((video, idx) => (
+                    <Card key={video.id} className='mb-2'>
+                      <ListGroup.Item
+                        action
+                        className='p-0 videoItem'
+                        onClick={() => {
+                          setCurrentVideo(video);
+                        }}>
+                        <Row
+                          className='d-flex align-items-center py-2'
+                          style={{ opacity: '.75' }}>
+                          <Col sm='1' className='px-2'>
+                            {video.done ? (
+                              <CircleIcon color='success' />
+                            ) : (
+                              <>
+                                {currentVideo.id === video.id ? (
+                                  <CircleOutlinedIcon color='primary' />
+                                ) : (
+                                  <CircleOutlinedIcon />
+                                )}
+                              </>
+                            )}
+                          </Col>
+
+                          <Col sm='1' className='px-2'>
+                            {' '}
+                            <OndemandVideoIcon />
+                          </Col>
+                          <Col sm='10' className='d-flex '>
+                            <Card.Subtitle style={{ fontSize: '90%' }}>
+                              {video.name}(24:22)
+                            </Card.Subtitle>
+                          </Col>
+                        </Row>
+                      </ListGroup.Item>
+                      {idx !== section.lessonsDtos.length - 1 && (
+                        <hr className='w-100 my-2' />
+                      )}
+                    </Card>
+                  ))}
                 </ListGroupItem>
               ))}
             </ListGroup>
           </Card>
         </div>
-        <div className='col-md-9'>{/* Other content goes here */}</div>
+        <div className='col-md-9'>
+          <h2>{currentVideo.name}</h2>
+          <Button variant='info'>Complete and Continue</Button>
+        </div>
       </div>
     </div>
   );

@@ -4,8 +4,13 @@ import { toAbsoluteUrl } from "../../shared/helpers/AssetHelpers";
 import { KTSVG } from "../../shared/helpers/KTSVG";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const ProfileHeader = () => {
+
+  const user = useSelector((state) => state.user.user);
+
+
   const location = useLocation();
   return (
     <div className="card mb-5 mb-xl-10">
@@ -29,7 +34,7 @@ const ProfileHeader = () => {
                     href="#"
                     className="text-gray-800 text-hover-primary fs-2 fw-bolder me-1"
                   >
-                    Max Smith
+                    {user.firstName} {user.lastName}
                   </a>
                   <a href="#">
                     <KTSVG
@@ -48,7 +53,7 @@ const ProfileHeader = () => {
                       path="/media/icons/duotune/communication/com006.svg"
                       className="svg-icon-4 me-1"
                     />
-                    Instructor
+                    {user.role}
                   </a>
                   <a
                     href="#"
@@ -58,7 +63,7 @@ const ProfileHeader = () => {
                       path="/media/icons/duotune/general/gen018.svg"
                       className="svg-icon-4 me-1"
                     />
-                    SF, Bay Area
+                    @{user.nickname}
                   </a>
                   <a
                     href="#"
@@ -68,7 +73,7 @@ const ProfileHeader = () => {
                       path="/media/icons/duotune/communication/com011.svg"
                       className="svg-icon-4 me-1"
                     />
-                    max@kt.com
+                    {user.email}
                   </a>
                 </div>
               </div>

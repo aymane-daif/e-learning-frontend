@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import CourseItem from './CourseItem';
-import { useHttpClient } from '../security/hooks/axiosProvider';
-import { KTSVG } from '../shared/helpers/KTSVG';
+import { useHttpClient } from '../../security/hooks/axiosProvider';
+import { KTSVG } from '../../shared/helpers/KTSVG';
 
 function ListCourses() {
   const {
@@ -160,7 +160,7 @@ function ListCourses() {
         ))}
       </div>
       {pageData && (
-        <ul className='pagination'>
+        <ul className='pagination mt-7'>
           {new Array(pageData?.totalPages).fill(0).map((_, i) => (
             <li
               className={`page-item ${pageNumber === i && 'active'}`}

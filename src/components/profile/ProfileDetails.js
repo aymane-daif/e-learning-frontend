@@ -1,23 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { toAbsoluteUrl } from "../../shared/helpers/AssetHelpers";
 import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
 
 const ProfileDetails = () => {
+  const user = useSelector((state) => state.user.user);
+
+  useEffect(() => {
+    reset(user);
+  }, [user]);
   const {
     register,
     formState: { errors },
     watch,
+    reset,
     handleSubmit,
   } = useForm({
     mode: "onChange",
-    defaultValues: {
-      firstName: 'Hafid',
-      lastName: 'Derradji',
-      dateOfBirth: "1964-10-10",
-      nickname: 'babaGool12',
-      email: 'hafid.derr@beinsport.com',
-      phone: '0606060606'
-    }
   });
   const [loading, setLoading] = useState(false);
   const onSubmit = (data) => {
@@ -79,11 +78,12 @@ const ProfileDetails = () => {
                       type="text"
                       className="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
                       placeholder="First name"
-                      {...register("firstName",{
+                      {...register("firstName", {
                         required: true,
                         minLength: {
                           value: 2,
-                          message: "firstname should contains at least 2 characters",
+                          message:
+                            "firstname should contains at least 2 characters",
                         },
                       })}
                     />
@@ -101,11 +101,12 @@ const ProfileDetails = () => {
                       type="text"
                       className="form-control form-control-lg form-control-solid"
                       placeholder="Last name"
-                      {...register("lastName",{
+                      {...register("lastName", {
                         required: true,
                         minLength: {
                           value: 2,
-                          message: "firstname should contains at least 2 characters",
+                          message:
+                            "firstname should contains at least 2 characters",
                         },
                       })}
                     />
@@ -191,9 +192,7 @@ const ProfileDetails = () => {
                 />
                 {errors.email && (
                   <div className="fv-plugins-message-container">
-                    <div className="fv-help-block">
-                      {errors.email?.message}
-                    </div>
+                    <div className="fv-help-block">{errors.email?.message}</div>
                   </div>
                 )}
               </div>
@@ -208,7 +207,7 @@ const ProfileDetails = () => {
                   type="tel"
                   className="form-control form-control-lg form-control-solid"
                   placeholder="Phone number"
-                  {...register("phone",{
+                  {...register("phone", {
                     required: true,
                     pattern: {
                       value: /[0-9]{10}/,

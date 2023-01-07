@@ -15,11 +15,7 @@ import './assets/sass/style.scss';
 import './assets/sass/style.react.scss';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <ReactKeycloakProvider
-    authClient={keycloak}
-    initOptions={{
-      onLoad: 'login-required',
-    }}>
+  <ReactKeycloakProvider authClient={keycloak}>
     <Provider store={store}>
       <BrowserRouter>
         <App>

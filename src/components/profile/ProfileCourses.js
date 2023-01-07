@@ -6,78 +6,23 @@ const ProfileCourses = () => {
   const [myCourses, setMyCourses] = useState([]);
   const user = useSelector((state) => state.user.user);
   const httpClient = useHttpClient(true);
-  const getMyCourses = useCallback(
-    (user_id) => {
-      httpClient.current
-        ?.get(`/users/course/${user_id}`)
-        .then((response) => {
-          const data = response.data;
-          console.log(data);
-        })
-        .catch((error) => {
-          console.log(error);
-          const listCourses = [
-            {
-              id: 1,
-              name: 'Figma Course',
-              description: 'Figma design end of studies rapport efficiency',
-              image: '/media/svg/brand-logos/figma-1.svg',
-              lastUpdated: 'Mar 14, 2021',
-              noStudents: 5,
-              courseLevel: 'INTERMEDIATE',
-              instructorDto: {
-                id: '1',
-                name: 'hamid ba7mdan',
-              },
-            },
-            {
-              id: 1,
-              name: 'Figma Course',
-              description: 'Figma design end of studies rapport efficiency',
-              image: '/media/svg/brand-logos/figma-1.svg',
-              lastUpdated: 'Mar 14, 2021',
-              noStudents: 5,
-              courseLevel: 'INTERMEDIATE',
-              instructorDto: {
-                id: '1',
-                name: 'hamid ba7mdan',
-              },
-            },
-            {
-              id: 1,
-              name: 'Figma Course',
-              description: 'Figma design end of studies rapport efficiency',
-              image: '/media/svg/brand-logos/figma-1.svg',
-              lastUpdated: 'Mar 14, 2021',
-              noStudents: 5,
-              courseLevel: 'INTERMEDIATE',
-              instructorDto: {
-                id: '1',
-                name: 'hamid ba7mdan',
-              },
-            },
-            {
-              id: 1,
-              name: 'Figma Course',
-              description: 'Figma design end of studies rapport efficiency',
-              image: '/media/svg/brand-logos/figma-1.svg',
-              lastUpdated: 'Mar 14, 2021',
-              noStudents: 5,
-              courseLevel: 'INTERMEDIATE',
-              instructorDto: {
-                id: '1',
-                name: 'hamid ba7mdan',
-              },
-            },
-          ];
-          setMyCourses(listCourses);
-        });
-    },
-    [httpClient]
-  );
+  const getMyCourses = useCallback(() => {
+    httpClient.current
+      ?.get(`/user-courses/${user.userId}`)
+      .then((response) => {
+        const data = response.data;
+        console.log(data);
+        setMyCourses(data);
+      })
+      .catch((error) => {
+        console.log(error);
+
+        setMyCourses([]);
+      });
+  }, [httpClient, user.userId]);
   useEffect(() => {
-    getMyCourses(user.id);
-  }, [getMyCourses, user.id]);
+    getMyCourses();
+  }, [getMyCourses]);
 
   return (
     <>
@@ -99,22 +44,23 @@ const ProfileCourses = () => {
       </div>
 
       <div className='row g-6 g-xl-9'>
-        {myCourses.map((course) => (
-          <div className='col-md-6 col-xl-4'>
-            <CardCourse
-              image={course.image}
-              badgeColor='primary'
-              courseLevel={course.courseLevel}
-              statusColor='primary'
-              name={course.name}
-              description={course.description}
-              lastUpdated={course.lastUpdated}
-              instructor={course.instructorDto.name}
-              progress={50}
-              id={4}
-            />
-          </div>
-        ))}
+        {myCourses &&
+          myCourses.map((course) => (
+            <div className='col-md-6 col-xl-4'>
+              <CardCourse
+                image='/media/svg/brand-logos/figma-1.svg'
+                badgeColor='primary'
+                courseLevel={course.courseLevel}
+                statusColor='primary'
+                name={course.name}
+                description={course.description}
+                lastUpdated={course.lastUpdated}
+                instructor={course.instructorDto.name}
+                progress={50}
+                id={4}
+              />
+            </div>
+          ))}
       </div>
     </>
   );

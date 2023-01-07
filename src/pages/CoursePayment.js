@@ -15,9 +15,9 @@ function CoursePayment() {
 
   const getCourseById = useCallback(() => {
     httpClient.current?.get(`/courses/${id}`).then((response) => {
+      console.log(response);
       const { data } = response;
       setCourse(data);
-      console.log(data);
     });
   }, [httpClient, id]);
 
@@ -31,7 +31,12 @@ function CoursePayment() {
         <Col sm='7'>
           <Container className='mx-0 p-0 '>
             {' '}
-            <CourseInfo course={course} /> <CourseContent course={course} />
+            {course && (
+              <>
+                <CourseInfo course={course} />
+                <CourseContent course={course} />
+              </>
+            )}
           </Container>
         </Col>
         <Col sm='5'>

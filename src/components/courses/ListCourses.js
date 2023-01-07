@@ -160,7 +160,7 @@ function ListCourses() {
         ))}
       </div>
       {pageData && (
-        <ul className='pagination'>
+        <ul className='pagination mt-7'>
           {new Array(pageData?.totalPages).fill(0).map((_, i) => (
             <li
               className={`page-item ${pageNumber === i && 'active'}`}

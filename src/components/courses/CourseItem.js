@@ -15,7 +15,9 @@ function CourseItem({
   priceType,
 }) {
   return (
-    <div className='card mb-5 mb-xxl-8 bg-dark m-3' style={{ width: '26rem' }}>
+    <div
+      className='card border border-2 border-gray-300 border-hover mb-5 mb-xxl-8 bg-dark m-3'
+      style={{ width: '26rem' }}>
       {/* begin::Body */}
       <div className='card-body pb-0'>
         {/* begin::Header */}

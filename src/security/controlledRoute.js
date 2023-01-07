@@ -1,15 +1,18 @@
 import { useKeycloak } from '@react-keycloak/web';
-import React from 'react';
 import { Route } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import hasRoles from './hasRoles';
 
 const RouterContentWrapper = (props) => {
   const { keycloak } = useKeycloak();
+  const location = useLocation();
+  const path = location.pathname;
+  console.log(path);
   const isUserAuthorized =
     !props.roles || props.roles.length === 0 || hasRoles(props.roles, keycloak);
   //TODO: uncomment this when dealing with roles in keycloak
   // if (props.roles && props.roles.length > 0 && !keycloak?.authenticated) {
-  if (!keycloak?.authenticated) {
+  if (!keycloak?.authenticated && path !== '/auth/register') {
     keycloak?.login();
   }
 

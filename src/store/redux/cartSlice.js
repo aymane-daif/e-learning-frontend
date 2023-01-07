@@ -25,7 +25,7 @@ export const cartSlice = createSlice({
     clearCart: (state) => {
       return {
         ...state,
-        course: [],
+        courses: [],
       };
     },
   },

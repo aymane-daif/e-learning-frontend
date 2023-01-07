@@ -5,6 +5,7 @@ import ProfileOverview from '../components/profile/ProfileOverview';
 import ProfileCourses from '../components/profile/ProfileCourses';
 import HomeStudent from '../pages/Home/HomeStudent';
 import CoursePayment from '../pages/CoursePayment';
+import Certification from '../pages/certification/Certification';
 
 export const routes = [
   { path: '/auth/register', Component: Registration, exact: true },
@@ -21,4 +22,7 @@ export const routes = [
     Component: ProfilePage,
     exact: false,
   }
+  ,
+  {path:"/certifications/:id",Component:Certification,exact:true}
+  
 ];

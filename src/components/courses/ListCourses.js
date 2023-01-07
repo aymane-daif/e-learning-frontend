@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import CourseItem from './CourseItem';
-import { useHttpClient } from '../security/hooks/axiosProvider';
-import { KTSVG } from '../shared/helpers/KTSVG';
+import { useHttpClient } from '../../security/hooks/axiosProvider';
+import { KTSVG } from '../../shared/helpers/KTSVG';
 
 function ListCourses() {
   const {

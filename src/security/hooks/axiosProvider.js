@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { spinnerActions } from '../../store/redux/spinnerSlice';
 
 export const useHttpClient = (secure = true, isBlob = false) => {
+  
   const axiosInstance = useRef();
   const { keycloak, initialized } = useKeycloak();
   const kcToken = keycloak?.token ?? '';
@@ -16,7 +17,6 @@ export const useHttpClient = (secure = true, isBlob = false) => {
     const headers = {
       Authorization: initialized ? `Bearer ${kcToken}` : undefined,
     };
-
     axiosInstance.current = axios.create({
       baseURL: API_URL,
       headers: secure ? headers : {},

@@ -1,0 +1,74 @@
+
+
+.body{
+    min-height:100vh;
+    max-width: 100vw;
+    padding: 100px 0 0 0;
+}
+
+
+.leftContent{
+    height: fit-content;
+    padding:50px 30px !important;
+}
+
+.rightContent{
+    position: relative;
+    top: 80px;
+    height:fit-content;
+}
+
+.payment{
+    box-shadow: 0px 0px 20px gray;  
+    background-color: white;
+}
+.c-title{
+    font-size:30px;
+    font-weight: bolder;
+    color: white;
+}
+
+.c-description{
+    font-size:16px;
+    font-weight: 500;
+
+}
+.c-instructor-name{
+    text-decoration: underline;
+    margin-left: 5px;
+    cursor:pointer;
+    font-weight: bold;
+}
+
+.c-image{
+    height: 200px;
+    object-fit: cover;
+}
+
+.c-price{
+    font-weight: bolder;
+}
+
+.c-details-container{
+    margin-top:20px;
+    padding: 0 30px;
+}
+
+.my-button{
+    background-color: #a435f0 !important;
+    margin: 20px 0;
+}
+
+.c-content-container{
+    margin-left:30px;
+}
+
+.play-icon{
+    color: #a435f0;
+    cursor: pointer;
+}
+
+.vedio-title{
+    cursor: pointer;
+    text-decoration: underline;
+}

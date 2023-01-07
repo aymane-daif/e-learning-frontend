@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { toAbsoluteUrl } from "../../shared/helpers/AssetHelpers";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
-import { useHttpClient } from "../../security/hooks/axiosProvider";
+
 const ProfileDetails = () => {
   const user = useSelector((state) => state.user.user);
 

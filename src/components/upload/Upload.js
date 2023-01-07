@@ -46,7 +46,6 @@ const Upload = () => {
     console.log(files);
     setFileList(files);
   };
-  
   return (
     <div className="container">
       <div className="box">

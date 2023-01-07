@@ -5,6 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import { useSelector } from 'react-redux';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 import '../../style/studentNavbar.css';
 
@@ -12,6 +13,7 @@ function StudentNavbar() {
   const { keycloak } = useKeycloak();
 
   const user = useSelector((state) => state.user.user);
+  const courses = useSelector((state) => state.cart.courses);
 
   const [navIsVisible, setNavIsVisible] = useState(false);
 
@@ -50,12 +52,23 @@ function StudentNavbar() {
             </NavLink>
           </Nav>
           <div className='d-flex justify-content-end'>
+            <NavLink exact to='/cart'>
+              <div className='cart'>
+                <div className='total-courses'>{courses.length}</div>
+                <ShoppingCartIcon
+                  fontSize='large'
+                  color='warning'
+                  className='mt-4 me-5'
+                />
+              </div>
+            </NavLink>
             <img
               className='user-image'
               onClick={() => toggleNavBarVisibility()}
               src={'https://avatars.dicebear.com/api/adventurer/aa.svg'}
               alt='avatar'
             />
+
             {navIsVisible && (
               <div
                 className={

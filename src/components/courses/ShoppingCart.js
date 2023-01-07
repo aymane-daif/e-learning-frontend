@@ -48,6 +48,7 @@ const ShoppingCart = () => {
       console.log(response);
       if (response.status === 200) {
         setIsPaymentValid(true);
+        console.log('done');
         dispatch(cartActions.clearCart());
       }
     });

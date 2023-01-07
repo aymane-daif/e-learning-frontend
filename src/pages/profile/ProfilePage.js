@@ -1,10 +1,12 @@
-import React, { useEffect, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { ProfileHeader } from "../../components/profile/ProfileHeader";
-import { useHttpClient } from "../../security/hooks/axiosProvider";
-import { userActions } from "../../store/redux/userSlice";
+import React, { useEffect, useCallback } from 'react';
+import { useKeycloak } from '@react-keycloak/web';
+import { useDispatch } from 'react-redux';
+import { ProfileHeader } from '../../components/profile/ProfileHeader';
+import { useHttpClient } from '../../security/hooks/axiosProvider';
+import { userActions } from '../../store/redux/userSlice';
 const ProfilePage = () => {
-  const user = useSelector((state) => state.user.user);
+  const { keycloak } = useKeycloak();
+
   const dispatch = useDispatch();
 
   const httpClient = useHttpClient(true);
@@ -16,11 +18,11 @@ const ProfilePage = () => {
         dispatch(userActions.setCurrentUser(data));
       });
     },
-    [httpClient]
+    [dispatch, httpClient]
   );
   useEffect(() => {
-    getCurrentUser("zakaria@gmail.com");
-  }, [getCurrentUser]);
+    getCurrentUser(keycloak.idTokenParsed.email);
+  }, [getCurrentUser, keycloak.idTokenParsed.email]);
 
   return <ProfileHeader />;
 };

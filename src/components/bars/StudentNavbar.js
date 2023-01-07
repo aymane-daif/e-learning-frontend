@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import '../../style/studentNavbar.css';
 
@@ -18,9 +18,15 @@ function StudentNavbar() {
       align-items-center py-2 border-bottom border-3 navbar-shadow bg-white col-12'>
         <ul className='list-container my-0'>
           <li className='list-item'>
-            <Link to='/'>Home</Link>
+            <NavLink to='/' className='nav-link'>
+              Home
+            </NavLink>
           </li>
-          <li className='list-item'>Profile</li>
+          <li className='list-item'>
+            <NavLink to='/profile/overview' className='nav-link'>
+              Profile
+            </NavLink>
+          </li>
           <li className='list-item'>Courses</li>
           <li className='list-item'>Certifications</li>
         </ul>

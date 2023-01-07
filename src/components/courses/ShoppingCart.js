@@ -11,43 +11,52 @@ import {
   Button,
   CardFooter,
 } from 'reactstrap';
+import Alert from 'react-bootstrap/Alert';
 import Badge from 'react-bootstrap/Badge';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import StripeCheckout from 'react-stripe-checkout';
+import { fromLevelToColor } from '../../shared/helpers/customClass';
+import { cartActions } from '../../store/redux/cartSlice';
+import { useHttpClient } from '../../security/hooks/axiosProvider';
 import '../../style/cart.css';
 
-import { fromLevelToColor } from '../../shared/helpers/customClass';
 const ShoppingCart = () => {
-  const [courses, setCourses] = useState([
-    {
-      id: 1,
-      name: 'Reactive Microservices with Spring WebFlux',
-      price: 50,
-      instructor: 'John Doe',
-      courseLevel: 'BEGINNER',
-    },
-    {
-      id: 2,
-      name: 'Java Lambda & Streams',
-      price: 100,
-      instructor: 'Jane Doe',
-      courseLevel: 'INTERMEDIATE',
-    },
-    {
-      id: 3,
-      name: 'Examples With Selenium WebDriver',
-      price: 150,
-      instructor: 'John Smith',
-      courseLevel: 'EXPERT',
-    },
-  ]);
+  const stripeKey = process.env.REACT_APP_STRIPE_KEY;
+
+  const [isPaymentValid, setIsPaymentValid] = useState(false);
+
+  const httpClient = useHttpClient(true);
+
+  const dispatch = useDispatch();
+
+  const courses = useSelector((state) => state.cart.courses);
 
   const total = courses.reduce((acc, course) => acc + course.price, 0);
 
-  const onCheckout = () => {
-    //TODO: do checkout here!!!
-  };
   const removeFromCart = (id) => {
-    setCourses(courses.filter((course) => course.id !== id));
+    dispatch(cartActions.removeCourseFromCart(id));
   };
+
+  function makePayment(token) {
+    const data = {
+      token: token.id,
+      price: total,
+      coursesIds: courses.map((course) => course.id),
+    };
+
+    httpClient.current?.post('/payment', data).then((response) => {
+      console.log(response);
+      if (response.status === 200) {
+        setIsPaymentValid(true);
+        dispatch(cartActions.clearCart());
+      }
+    });
+  }
+
+  if (isPaymentValid) {
+    return <Alert variant='success'>Payment processed successfully!</Alert>;
+  }
 
   return (
     <Container>
@@ -69,7 +78,7 @@ const ShoppingCart = () => {
                         {course.name}
                       </CardTitle>
                       <CardSubtitle className='mb-2'>
-                        By {course.instructor}
+                        By {course.instructorDto.name}
                       </CardSubtitle>
                       <Badge
                         pill
@@ -97,9 +106,9 @@ const ShoppingCart = () => {
         </Col>
         <Col sm='4'>
           <h3>Total: ${total}</h3>
-          <Button color='success' onClick={onCheckout}>
-            Checkout
-          </Button>
+          <StripeCheckout stripeKey={stripeKey} token={makePayment}>
+            <Button color='success'>Checkout</Button>
+          </StripeCheckout>
         </Col>
       </Row>
     </Container>

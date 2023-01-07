@@ -1,30 +1,31 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import "../../style/studentNavbar.css";
+import '../../style/studentNavbar.css';
 
-function StudentNavbar(){
+function StudentNavbar() {
+  const [navIsVisible, setNavIsVisible] = useState(false);
 
-    const [navIsVisible,setNavIsVisible] = useState(false);
+  function toggleNavBarVisiblity() {
+    setNavIsVisible((previousState) => !previousState);
+  }
 
-    function toggleNavBarVisiblity(){
-      setNavIsVisible(previousState => !previousState);
-    }
-
-    return (
-            
-        <>
-          <div className="place-holder" ></div>
-          <nav className="d-flex justify-content-around 
-      align-items-center py-2 border-bottom border-3 navbar-shadow bg-white col-12">
-
-        <ul className="list-container my-0">
-          <li className="list-item">Home</li>
-          <li className="list-item">Profile</li>
-          <li className="list-item">Courses</li>
-          <li className="list-item">Certifications</li>
+  return (
+    <>
+      <div className='place-holder'></div>
+      <nav
+        className='d-flex justify-content-around 
+      align-items-center py-2 border-bottom border-3 navbar-shadow bg-white col-12'>
+        <ul className='list-container my-0'>
+          <li className='list-item'>
+            <Link to='/'>Home</Link>
+          </li>
+          <li className='list-item'>Profile</li>
+          <li className='list-item'>Courses</li>
+          <li className='list-item'>Certifications</li>
         </ul>
 
-        <div className="d-flex justify-content-end">
+        {/* <div className="d-flex justify-content-end">
           <img className="user-image" onClick={()=>toggleNavBarVisiblity()} src={"https://avatars.dicebear.com/api/adventurer/aa.svg"} />
           
           <div className={"hidden-nav px-3"+(navIsVisible?" visible-nav":"")}>
@@ -49,13 +50,10 @@ function StudentNavbar(){
             <div className="list-item-hidden mt-3">Sign out</div>
 
           </div>
-        </div>
-
-        </nav>
-        </>
-
-    );
+        </div> */}
+      </nav>
+    </>
+  );
 }
-
 
 export default StudentNavbar;

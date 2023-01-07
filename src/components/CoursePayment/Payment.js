@@ -2,9 +2,13 @@ import React from 'react';
 import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
 import DevicesIcon from '@mui/icons-material/Devices';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import StripeCheckout from 'react-stripe-checkout';
+import { useDispatch } from 'react-redux';
+import { cartActions } from '../../store/redux/cartSlice';
+import { Link } from 'react-router-dom';
 
-export default function Payment({ stripeKey, makePayment, course }) {
+export default function Payment({ course }) {
+  const dispatch = useDispatch();
+
   return (
     <div className='rightContent d-flex justify-content-lg-center col'>
       <div
@@ -13,15 +17,17 @@ export default function Payment({ stripeKey, makePayment, course }) {
         <img className='c-image p-0 m-0 col-12' src='/img-16.jpg' />
         <div className='c-details-container'>
           <h1 className='c-price'>${course?.price}</h1>
-          <StripeCheckout stripeKey={stripeKey} token={makePayment}>
+          <Link to={'/cart'}>
             <button
               type='button'
               className='btn btn-primary
-                         my-button col-12 mt-5'>
-              Buy Now
+                         my-button col-12 mt-5'
+              onClick={() => {
+                dispatch(cartActions.addCourseToCart(course));
+              }}>
+              Add to Cart
             </button>
-          </StripeCheckout>
-
+          </Link>
           <div className='mt-5 d-flex'>
             <AllInclusiveIcon />
             <div className='ms-4'>Full lifetime access</div>

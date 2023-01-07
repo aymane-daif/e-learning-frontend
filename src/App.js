@@ -12,7 +12,9 @@ function App({ children }) {
   return (
     <>
       <StudentNavbar></StudentNavbar>
-      <Container style={{ marginTop: '6rem' }}>{children}</Container>
+      <Container style={{ marginTop: '6rem', marginBottom: '3rem' }}>
+        {children}
+      </Container>
     </>
   );
 }

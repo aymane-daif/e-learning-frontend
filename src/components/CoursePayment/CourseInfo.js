@@ -14,10 +14,7 @@ function CourseInfo({ course }) {
   return (
     <div className='leftContent mx-0 py-5 bg-dark text-white'>
       <h1 className='c-title'>{course?.name}</h1>
-      <div className='c-description mt-5'>
-        Learn python and how to use it to analyze,visualize and present data.
-        Includes tons of sample code and hours of video!
-      </div>
+      <div className='c-description mt-5'>{course?.description}</div>
       <div className='d-flex flex-column align-items-end mt-5'>
         <div className='c-students-nbr'>{course?.noStudents} students</div>
         <div className='c-instructor'>

@@ -23,7 +23,7 @@ function Home() {
       });
   }, [dispatch, httpClient, keycloak.idTokenParsed.email]);
   useEffect(() => {
-    console.log(keycloak.idTokenParsed.email);
+    console.log(keycloak.idTokenParsed.sub);
     getCurrentUser();
   }, [getCurrentUser, keycloak.idTokenParsed.email]);
 

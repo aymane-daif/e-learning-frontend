@@ -14,11 +14,16 @@ function App({ children }) {
 
   return (
     <>
-      {path !== '/auth/register' && <StudentNavbar></StudentNavbar>}
-
-      <Container style={{ marginTop: '6rem', marginBottom: '3rem' }}>
-        {children}
-      </Container>
+      {path !== '/auth/register' && !path.startsWith('/certifications') && (
+        <StudentNavbar></StudentNavbar>
+      )}
+      {path.startsWith('/certifications') ? (
+        <>{children}</>
+      ) : (
+        <Container style={{ marginTop: '6rem', marginBottom: '3rem' }}>
+          {children}
+        </Container>
+      )}
     </>
   );
 }

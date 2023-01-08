@@ -1,0 +1,89 @@
+
+import {StyleSheet} from '@react-pdf/renderer'; 
+
+export const styles = StyleSheet.create({
+  page: {
+    backgroundColor: '#E4E4E4',
+  },
+  certif_title:{
+      color:"gray",
+      textAlign:"center",
+      marginTop:"40px",
+      fontSize:"15px"
+  },
+  second:{
+      alignSelf:"center",
+      marginTop:"60px",
+      color:"gray",
+      fontSize:"15px"
+  },
+  username:{
+      alignSelf:"center",
+      marginVertical:"10px",
+      fontSize:"30px",
+      fontWeight:"bold"
+  },
+  text1:{
+      alignSelf:"center", 
+      color:"gray",
+      fontSize:"15px",
+      margin:"10px"
+  },
+  text2:{
+      marginTop:"10px",
+      alignSelf:"center",
+      color:"gray",
+      fontSize:"15px"
+  },
+  course_title:{
+      marginTop:"25px",
+      fontSize:"24px",
+      fontWeight:"bold",
+      alignSelf:"center"
+  },
+  image:{
+      maxWidth:"120px",
+      maxHeight:"120px",
+      marginLeft:"40px",
+      display:"inline"
+  } ,
+  signatures:{
+      display:"flex",
+      flexDirection:"row",
+      justifyContent:"space-between",
+      alignItems:"center",
+      marginTop:"40px"
+  }
+  ,
+  signature:{
+      width:"150px",
+      height:"60px",
+      marginRight:"40px"
+  },
+  footer:{
+      marginTop:"40px",
+      display:"flex",
+      flexDirection:"column",
+      alignSelf:"center",
+      alignItems:"center",
+      justifyContent:"center"
+  }
+  ,brand_container:{
+      display:"flex",
+      flexDirection:"row",
+      alignItems:"center"
+  },
+  brand:{
+      fontSize:"15px"
+  }
+  ,logo:{
+      maxHeight:"30px",
+      maxWidth:"30px",
+      marginRight:"5px"
+  },
+  date:{
+      color:"gray",
+      fontSize:"14px"
+  }
+
+});

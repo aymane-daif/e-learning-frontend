@@ -14,7 +14,7 @@ export const routes = [
   { path: '/auth/register', Component: Registration, exact: true },
   { path: '/courses/:id', Component: CoursePayment, exact: true },
   { path: '/cart', Component: ShoppingCart, exact: true },
-  { path: '/videos', Component: VideoLessons, exact: true },
+  { path: '/videos/:id', Component: VideoLessons, exact: true },
   { path: '/certifications/:id', Component: Certification, exact: true },
   {
     path: '/profile/*',

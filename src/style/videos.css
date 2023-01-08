@@ -1,0 +1,12 @@
+.sidebar {
+  position: fixed;
+  top: 6rem;
+  bottom: 0;
+  width: 300px;
+  overflow-y: scroll;
+}
+
+.content {
+  margin-left: 350px;
+  overflow-y: auto;
+}

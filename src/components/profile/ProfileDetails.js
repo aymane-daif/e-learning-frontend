@@ -3,17 +3,21 @@ import { toAbsoluteUrl } from "../../shared/helpers/AssetHelpers";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useHttpClient } from "../../security/hooks/axiosProvider";
+import { useKeycloak } from "@react-keycloak/web";
 const ProfileDetails = () => {
   const currentUser = useSelector((state) => state.user.user);
   const httpClient = useHttpClient(true);
-  const updateUser = (user_id, newUser) =>  {
-    httpClient.current.patch(`http://localhost:8081/users/${user_id}`, newUser)
+  const { keycloak } = useKeycloak();
+
+  const updateUser = (user) =>  {
+    httpClient.current.patch(`http://localhost:8081/users/${keycloak.idTokenParsed.sub}`, user)
     .then((response) => {
       console.log(response.data);
-    });
+    }); 
   }
   const onSubmit = (data) => {
     const user = {
+      userId: data.userId,
       firstName: data.firstName,
       lastName: data.lastName,
       phone: data.phone,
@@ -22,7 +26,7 @@ const ProfileDetails = () => {
       nickname: data.nickname,
     };
     console.log(user);
-    updateUser(currentUser.userId, user);
+    updateUser(user);
   };
   
   useEffect(() => {

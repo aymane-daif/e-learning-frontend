@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { cartActions } from '../../store/redux/cartSlice';
 import { Link } from 'react-router-dom';
 
-export default function Payment({ course }) {
+export default function Payment({ course,page }) {
   const dispatch = useDispatch();
 
   return (
@@ -17,17 +17,20 @@ export default function Payment({ course }) {
         <img className='c-image p-0 m-0 col-12' src='/img-16.jpg' />
         <div className='c-details-container'>
           <h1 className='c-price'>${course?.price}</h1>
+          
+          {page=="student"&&
           <Link to={'/cart'}>
-            <button
-              type='button'
-              className='btn btn-primary
-                         my-button col-12 mt-5'
-              onClick={() => {
-                dispatch(cartActions.addCourseToCart(course));
-              }}>
-              Add to Cart
-            </button>
-          </Link>
+          <button
+            type='button'
+            className='btn btn-primary
+                       my-button col-12 mt-5'
+            onClick={() => {
+              dispatch(cartActions.addCourseToCart(course));
+            }}>
+            Add to Cart
+          </button>
+        </Link>}
+          
           <div className='mt-5 d-flex'>
             <AllInclusiveIcon />
             <div className='ms-4'>Full lifetime access</div>

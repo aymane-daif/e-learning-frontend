@@ -17,6 +17,7 @@ const AddUserForm = () => {
   const history = useHistory();
 
   const onSubmit = (data) => {
+      
     const user = {
       firstName: data.firstName,
       lastName: data.lastName,

@@ -6,6 +6,7 @@ import Payment from '../components/CoursePayment/Payment';
 import CourseContent from '../components/CoursePayment/CourseContent';
 import { useHttpClient } from '../security/hooks/axiosProvider';
 import { useParams } from 'react-router-dom';
+import hasRoles from '../security/hasRoles';
 
 function CoursePayment() {
   let { id } = useParams();
@@ -34,13 +35,13 @@ function CoursePayment() {
             {course && (
               <>
                 <CourseInfo course={course} />
-                <CourseContent course={course} />
+                <CourseContent course={course} page="student" />
               </>
             )}
           </Container>
         </Col>
         <Col sm='5'>
-          <Payment course={course} />
+          <Payment course={course} page="student" />
         </Col>
       </Row>
     </div>

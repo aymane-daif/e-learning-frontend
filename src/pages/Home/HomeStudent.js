@@ -1,5 +1,5 @@
 import React from 'react';
-import ListCourses from '../../components/courses/ListCourses';
+import ListCourses from '../../components/courses-student/ListCourses';
 import BoltIcon from '@mui/icons-material/Bolt';
 
 function HomeStudent() {

@@ -35,10 +35,10 @@ export default function Certification() {
     if (certificate == null) return '';
 
     const MONTHS = [
-      'Jenuary',
-      'Feburary',
+      'January',
+      'February',
       'March',
-      'Aril',
+      'April',
       'May',
       'June',
       'July',

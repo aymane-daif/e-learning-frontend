@@ -3,15 +3,19 @@ import ProfilePage from '../pages/profile/ProfilePage';
 import { ProfileDetails } from '../components/profile/ProfileDetails';
 import ProfileCourses from '../components/profile/ProfileCourses';
 import CoursePayment from '../pages/CoursePayment';
+import Certification from '../pages/certification/Certification';
 import ShoppingCart from '../components/courses/ShoppingCart';
 import VideoLessons from '../components/videos/VideoLessons';
 import Home from '../pages/Home';
+import HomeStudent from '../pages/Home/HomeStudent';
 import Certification from '../pages/certification/Certification';
 
 export const routes = [
   { path: '/', Component: Home, exact: true },
   { path: '/auth/register', Component: Registration, exact: true },
   { path: '/courses/:id', Component: CoursePayment, exact: true },
+  { path: '/',
+   Component: HomeStudent, exact: true },
   { path: '/cart', Component: ShoppingCart, exact: true },
   { path: '/videos/:id', Component: VideoLessons, exact: true },
   { path: '/certifications/:id', Component: Certification, exact: true },
@@ -23,5 +27,8 @@ export const routes = [
     ],
     Component: ProfilePage,
     exact: false,
-  },
+  }
+  ,
+  {path:"/certifications/:id",Component:Certification,exact:true}
+  
 ];

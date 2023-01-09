@@ -16,7 +16,7 @@ const CardCourse = ({
 }) => {
   return (
     <Link
-      to={`/profile/courses/${id}`}
+      to={`/videos/${id}`}
       className='card border border-2 border-gray-300 border-hover'>
       <div className='card-header border-0 pt-9'>
         <div className='card-title m-0'>

@@ -12,7 +12,11 @@ const RouterContentWrapper = (props) => {
     !props.roles || props.roles.length === 0 || hasRoles(props.roles, keycloak);
   //TODO: uncomment this when dealing with roles in keycloak
   // if (props.roles && props.roles.length > 0 && !keycloak?.authenticated) {
-  if (!keycloak?.authenticated && path !== '/auth/register') {
+  if (
+    !keycloak?.authenticated &&
+    path !== '/auth/register' &&
+    !path.startsWith('/certifications')
+  ) {
     keycloak?.login();
   }
 

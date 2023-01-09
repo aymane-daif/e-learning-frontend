@@ -42,7 +42,6 @@ const ProfileCourses = () => {
           </div>
         </div>
       </div>
-
       <div className='row g-6 g-xl-9'>
         {myCourses &&
           myCourses.map((course) => (
@@ -65,5 +64,4 @@ const ProfileCourses = () => {
     </>
   );
 };
-
 export default ProfileCourses;

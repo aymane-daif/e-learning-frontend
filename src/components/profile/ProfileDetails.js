@@ -2,13 +2,32 @@ import React, { useState, useEffect, useCallback } from "react";
 import { toAbsoluteUrl } from "../../shared/helpers/AssetHelpers";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
-
+import { useHttpClient } from "../../security/hooks/axiosProvider";
 const ProfileDetails = () => {
-  const user = useSelector((state) => state.user.user);
-
+  const currentUser = useSelector((state) => state.user.user);
+  const httpClient = useHttpClient(true);
+  const updateUser = (user_id, newUser) =>  {
+    httpClient.current.patch(`http://localhost:8081/users/${user_id}`, newUser)
+    .then((response) => {
+      console.log(response.data);
+    });
+  }
+  const onSubmit = (data) => {
+    const user = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      phone: data.phone,
+      dateOfBirth: data.dateOfBirth,
+      email: data.email,
+      nickname: data.nickname,
+    };
+    console.log(user);
+    updateUser(currentUser.userId, user);
+  };
+  
   useEffect(() => {
-    reset(user);
-  }, [user]);
+    reset(currentUser);
+  }, [currentUser]);
   const {
     register,
     formState: { errors },
@@ -19,9 +38,6 @@ const ProfileDetails = () => {
     mode: "onChange",
   });
   const [loading, setLoading] = useState(false);
-  const onSubmit = (data) => {
-    console.log(data);
-  };
   return (
     <div className="card mb-5 mb-xl-10">
       <div

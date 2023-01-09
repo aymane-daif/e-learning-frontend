@@ -3,6 +3,7 @@ import DateRangeIcon from '@mui/icons-material/EmojiEvents';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 
 function CourseInfo({ course }) {
+
   function capitalizeFirstLetter(string) {
     if (string == null) {
       return '';
@@ -10,7 +11,7 @@ function CourseInfo({ course }) {
       return string.charAt(0).toUpperCase() + string.slice(1);
     }
   }
-
+  
   return (
     <div className='leftContent mx-0 py-5 bg-dark text-white'>
       <h1 className='c-title'>{course?.name}</h1>

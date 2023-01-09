@@ -36,7 +36,7 @@ function StudentNavbar() {
             </NavLink>
             <NavLink
               exact
-              to='/profile/overview'
+              to='/profile/courses'
               className={({ isActive }) =>
                 isActive ? 'list-item nav-link' : 'nav-link'
               }>

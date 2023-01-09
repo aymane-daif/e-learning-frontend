@@ -1,16 +1,49 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { toAbsoluteUrl } from "../../shared/helpers/AssetHelpers";
 import { KTSVG } from "../../shared/helpers/KTSVG";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useHttpClient } from "../../security/hooks/axiosProvider";
 
 const ProfileHeader = () => {
-
+  const [userStats, setUserStats] = useState({
+    courseNumber: 0,
+    certificationNumber: 0,
+  });
   const user = useSelector((state) => state.user.user);
 
+  const httpClient = useHttpClient(true);
+  const getMyCourseNumber = useCallback(() => {
+    httpClient.current
+      ?.get(`/user-courses/course-number/${user.userId}`)
+      .then((response) => {
+        const data = response.data;
+        console.log(data);
+        setUserStats((prev) => ({ ...prev, courseNumber: data }));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [httpClient, user.userId]);
 
+  const getMyCertificationNumber = useCallback(() => {
+    httpClient.current
+      ?.get(`/user-courses/certification-number/${user.userId}`)
+      .then((response) => {
+        const data = response.data;
+        console.log(data);
+        setUserStats((prev) => ({ ...prev, certificationNumber: data }));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [httpClient, user.userId]);
+
+  useEffect(() => {
+    getMyCourseNumber();
+    getMyCertificationNumber();
+  }, [getMyCourseNumber, getMyCertificationNumber]);
   const location = useLocation();
   return (
     <div className="card mb-5 mb-xl-10">
@@ -84,15 +117,7 @@ const ProfileHeader = () => {
                 <div className="d-flex flex-wrap">
                   <div className="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                     <div className="d-flex align-items-center">
-                      <div className="fs-2 fw-bolder">4500$</div>
-                    </div>
-
-                    <div className="fw-bold fs-6 text-gray-400">Earnings</div>
-                  </div>
-
-                  <div className="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
-                    <div className="d-flex align-items-center">
-                      <div className="fs-2 fw-bolder">75</div>
+                      <div className="fs-2 fw-bolder">{userStats.courseNumber}</div>
                     </div>
 
                     <div className="fw-bold fs-6 text-gray-400">Courses</div>
@@ -100,11 +125,11 @@ const ProfileHeader = () => {
 
                   <div className="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                     <div className="d-flex align-items-center">
-                      <div className="fs-2 fw-bolder">60%</div>
+                      <div className="fs-2 fw-bolder">{userStats.certificationNumber}</div>
                     </div>
 
                     <div className="fw-bold fs-6 text-gray-400">
-                     Rate
+                      Certifications
                     </div>
                   </div>
                 </div>
@@ -119,20 +144,7 @@ const ProfileHeader = () => {
               <Link
                 className={
                   `nav-link text-active-primary me-6 ` +
-                  (location.pathname === "/profile/overview" &&
-                    "active")
-                }
-                to="/profile/overview"
-              >
-                Overview
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                className={
-                  `nav-link text-active-primary me-6 ` +
-                  (location.pathname === "/profile/courses" &&
-                    "active")
+                  (location.pathname === "/profile/courses" && "active")
                 }
                 to="/profile/courses"
               >
@@ -143,8 +155,7 @@ const ProfileHeader = () => {
               <Link
                 className={
                   `nav-link text-active-primary me-6 ` +
-                  (location.pathname === "/profile/settings" &&
-                    "active")
+                  (location.pathname === "/profile/settings" && "active")
                 }
                 to="/profile/settings"
               >

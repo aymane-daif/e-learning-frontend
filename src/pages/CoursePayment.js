@@ -9,22 +9,23 @@ import { useParams } from 'react-router-dom';
 import hasRoles from '../security/hasRoles';
 
 function CoursePayment() {
-  let { id } = useParams();
 
-  const httpClient = useHttpClient(true);
-  const [course, setCourse] = useState(null);
+    let { id } = useParams();
 
-  const getCourseById = useCallback(() => {
-    httpClient.current?.get(`/courses/${id}`).then((response) => {
-      console.log(response);
-      const { data } = response;
-      setCourse(data);
-    });
-  }, [httpClient, id]);
+    const httpClient = useHttpClient(true);
+    const [course, setCourse] = useState(null);
 
-  useEffect(() => {
-    getCourseById();
-  }, [getCourseById]);
+    const getCourseById = useCallback(() => {
+        httpClient.current?.get(`/courses/${id}`).then((response) => {
+        const { data } = response;
+        setCourse(data);
+        console.log(data);
+        });
+    }, [httpClient, id]);
+
+    useEffect(() => {
+        getCourseById();
+    }, [getCourseById]);
 
   return (
     <div>

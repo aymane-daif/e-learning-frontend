@@ -17,7 +17,7 @@ function App({ children }) {
       {path !== '/auth/register' && !path.startsWith('/certifications') && (
         <StudentNavbar></StudentNavbar>
       )}
-      {path.startsWith('/certifications') ? (
+      {path.startsWith('/certifications') || path.startsWith('/videos') ? (
         <>{children}</>
       ) : (
         <Container style={{ marginTop: '6rem', marginBottom: '3rem' }}>

@@ -9,4 +9,5 @@ export default function Lesson({lesson}){
             <PlayCircleIcon className="me-2 play-icon" />{lesson}
         </div>
     );
+    
 }

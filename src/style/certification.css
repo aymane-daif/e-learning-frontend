@@ -1,24 +1,4 @@
-<<<<<<< HEAD
 
-.bigContainer{
-    height: 100vh;
-    width: 100vw;
-    position: relative;
-}
-.container{
-    min-height: 100vh ;
-    min-width: 100vh ;
-    margin: 0 !important;
-    padding: 0 !important;
-    position: absolute;
-    inset: 0;
-}
-
-iframe{
-    min-width: 100vw !important;
-    margin: 0;
-    padding: 0;
-=======
 .bigContainer {
   height: 100vh;
   max-width: 100vw;
@@ -35,5 +15,4 @@ iframe {
   width: 100% !important;
   margin: 0;
   padding: 0;
->>>>>>> 4597386f09fc1976eb23f8782e22c848ddec08ca
 }

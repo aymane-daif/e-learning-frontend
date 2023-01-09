@@ -45,7 +45,7 @@ const ProfileCourses = () => {
       <div className='row g-6 g-xl-9'>
         {myCourses &&
           myCourses.map((course) => (
-            <div className='col-md-6 col-xl-4'>
+            <div className='col-md-6 col-xl-4' key={course.id}>
               <CardCourse
                 image='/media/svg/brand-logos/figma-1.svg'
                 badgeColor='primary'
@@ -56,7 +56,7 @@ const ProfileCourses = () => {
                 lastUpdated={course.lastUpdated}
                 instructor={course.instructorDto.name}
                 progress={50}
-                id={4}
+                id={course.id}
               />
             </div>
           ))}

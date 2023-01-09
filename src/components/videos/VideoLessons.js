@@ -7,19 +7,24 @@ import {
   Col,
   Button,
 } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
+
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import CircleIcon from '@mui/icons-material/Circle';
 import { useHttpClient } from '../../security/hooks/axiosProvider';
 import '../../style/videos.css';
+import { useSelector } from 'react-redux';
 
 const VideoLessons = () => {
+  const user = useSelector((state) => state.user.user);
+  let history = useHistory();
+
   const httpClient = useHttpClient(true);
   const { id } = useParams();
   const [course, setCourse] = useState(null);
   const [videos, setVideos] = useState(null);
-  const [currentLesson, setCurrentLesson] = useState(null);
+  const [currentLesson, setCurrentLesson] = useState({});
   const [currentVideoUri, setCurrentVideoUri] = useState(null);
 
   const getVideoUri = (videos, lesson) => {
@@ -52,9 +57,59 @@ const VideoLessons = () => {
     });
   }, [httpClient, id]);
 
+  const updateLessonById = useCallback(() => {
+    httpClient.current
+      ?.patch(`/courses/lessons/${currentLesson.id}`, currentLesson)
+      .then((response) => {
+        const { data } = response;
+        console.log(data);
+        // let tempCourse = course;
+        // for (let i = 0; i < tempCourse.sectionDtos.length; i++) {
+        //   const sectionDto = tempCourse.sectionDtos[i];
+        //   for (let j = 0; j < sectionDto.lessonsDtos.length; j++) {
+        //     let lessonDto = sectionDto.lessonsDtos[j];
+        //     if (lessonDto.id === data.id) {
+        //       lessonDto = data;
+        //     }
+        //   }
+        // }
+        getCourseById(course?.id);
+      });
+  }, [course?.id, currentLesson, getCourseById, httpClient]);
+
   useEffect(() => {
     getCourseById();
   }, [getCourseById]);
+
+  const completeLesson = () => {
+    setCurrentLesson((prevState) => ({
+      ...prevState,
+      done: true,
+    }));
+    updateLessonById();
+  };
+
+  const createCertif = useCallback(() => {
+    console.log(course, 'course');
+    const c = {
+      issuedDate: new Date(),
+      courseId: course?.id,
+      userId: user?.userId,
+      courseTitle: course?.name,
+      userFullname: user?.firstName + ' ' + user?.lastName,
+    };
+    httpClient.current?.post(`/certifications`, c).then((response) => {
+      const { data } = response;
+      history.push('/certifications/' + data);
+    });
+  }, [
+    course,
+    history,
+    httpClient,
+    user?.firstName,
+    user?.lastName,
+    user?.userId,
+  ]);
 
   return (
     <div
@@ -66,7 +121,7 @@ const VideoLessons = () => {
             <Card className='bg-light mb-3'>
               <h1 className='font-weight-bold'>{course.name}</h1>
               <ListGroup variant='flush'>
-                {course.sectionDtos.map((section) => (
+                {course.sectionDtos.map((section, i) => (
                   <ListGroupItem key={section.id} className='pb-2'>
                     <h6 className='font-weight-bold my-2'>{section.name}</h6>
                     {section.lessonsDtos.map((lesson, idx) => (
@@ -128,11 +183,18 @@ const VideoLessons = () => {
                   marginBottom: '2rem',
                   width: '90%',
                 }}></video>
-              <Button
-                variant='info mx-auto'
-                onClick={() => console.log('done')}>
+              <Button variant='info mx-auto' onClick={completeLesson}>
                 Complete and Continue
               </Button>
+              <div
+                onClick={createCertif}
+                style={{
+                  cursor: 'pointer',
+                  textAlign: 'center',
+                  opacity: '0',
+                }}>
+                ok
+              </div>
             </div>
           </div>
         </div>

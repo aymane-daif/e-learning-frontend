@@ -1,8 +1,8 @@
 import React from 'react';
+import AddCourse from '../addCourse/AddCourse';
 
-
-function HomeInstructor(){
-    return (<h1>Instructor page</h1>);
+function HomeInstructor() {
+  return <AddCourse />;
 }
 
 export default HomeInstructor;

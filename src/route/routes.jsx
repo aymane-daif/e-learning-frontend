@@ -8,6 +8,7 @@ import Certification from '../pages/certification/Certification';
 import ShoppingCart from '../components/courses/ShoppingCart';
 import VideoLessons from '../components/videos/VideoLessons';
 import Home from '../pages/Home';
+import HomeStudent from '../pages/Home/HomeStudent';
 
 export const routes = [
   { path: '/', Component: Home, exact: true },

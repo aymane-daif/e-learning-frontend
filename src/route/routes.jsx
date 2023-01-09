@@ -8,11 +8,8 @@ import Certification from '../pages/certification/Certification';
 import ShoppingCart from '../components/courses/ShoppingCart';
 import VideoLessons from '../components/videos/VideoLessons';
 import Home from '../pages/Home';
-<<<<<<< HEAD
 import HomeStudent from '../pages/Home/HomeStudent';
-=======
 import Certification from '../pages/certification/Certification';
->>>>>>> 4597386f09fc1976eb23f8782e22c848ddec08ca
 
 export const routes = [
   { path: '/', Component: Home, exact: true },
